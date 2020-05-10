@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AwesomeProject</string>
+    <string name="loginToolbarTitle">Авторизация</string>
+    <string name="signUpToolbarTitle">Регистрация</string>
+    <string name="latestMessagesToolbarTitle">Диалоги</string>
+    <string name="newMessageToolbarTitle">Новый диалог</string>
+    <string name="profileToolbarTitle">Ваш профиль</string>
 </resources>

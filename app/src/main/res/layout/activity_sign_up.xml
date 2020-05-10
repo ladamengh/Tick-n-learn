@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".auth.SignUpActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photoImageViewR"
+            app:civ_border_width="2dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/select_photo_rounded"/>
+
+        <Button
+            android:id="@+id/photoButtonR"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Выбрать фотографию"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/usernameEditTextR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Имя пользователя"
+        android:inputType="textPersonName"
+        android:paddingLeft="16dp"
+        app:met_floatingLabel="normal"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/emailEditTextR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Электронная почта (email)"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="16dp"
+        app:met_floatingLabel="normal"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/passwordEditTextR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Пароль"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        app:met_floatingLabel="normal"/>
+
+    <Button
+        android:id="@+id/registerButtonR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Зарегистрироваться"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@android:color/holo_blue_light"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/alreadyHaveAccountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уже зарегистрированы?"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</RelativeLayout>

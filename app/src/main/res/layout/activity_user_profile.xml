@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".auth.SignUpActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photoImageViewP"
+            app:civ_border_width="2dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/select_photo_rounded"/>
+
+
+        <TextView
+            android:id="@+id/usernameTextViewP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            tools:text= "Имя пользователя"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:paddingStart="16dp" />
+
+        <TextView
+            android:id="@+id/emailTextViewP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            tools:text= "Электронная почта"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"
+            android:paddingLeft="16dp"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/chatButtonP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Перейти в диалоги"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:background="@android:color/holo_blue_light"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</RelativeLayout>
