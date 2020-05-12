@@ -6,7 +6,9 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.user_row_new_message_layout.view.*
 
-class UserItem(val user: User): Item<GroupieViewHolder>() {
+class UserItem(
+    val user: User
+): Item<GroupieViewHolder>() {
 
     override fun getLayout(): Int {
         return R.layout.user_row_new_message_layout

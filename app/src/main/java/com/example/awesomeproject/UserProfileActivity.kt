@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.Toolbar
+import com.example.awesomeproject.courses.CoursesListActivity
 import com.example.awesomeproject.messages.LatestMessagesActivity
 import com.example.awesomeproject.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +38,10 @@ class UserProfileActivity : AppCompatActivity() {
 
         chatButtonP.setOnClickListener {
             startActivity(Intent(this, LatestMessagesActivity::class.java))
+        }
+
+        coursesButtonP.setOnClickListener {
+            startActivity(Intent(this, CoursesListActivity::class.java))
         }
     }
 

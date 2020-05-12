@@ -34,7 +34,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         chatLogRecyclerView.adapter = adapter
 
-        toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        toUser = intent.getParcelableExtra(NewMessageActivity.USER_KEY)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(toUser?.username)

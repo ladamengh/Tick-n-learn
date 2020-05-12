@@ -4,5 +4,8 @@
     <string name="signUpToolbarTitle">Регистрация</string>
     <string name="latestMessagesToolbarTitle">Диалоги</string>
     <string name="newMessageToolbarTitle">Новый диалог</string>
+    <string name="createCourseToolbarTitle">Создание нового курса</string>
     <string name="profileToolbarTitle">Ваш профиль</string>
+    <string name="coursesToolbarTitle">Доступные курсы</string>
+    <string name="score">Количество очков: </string>
 </resources>

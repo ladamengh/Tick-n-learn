@@ -100,18 +100,11 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d("SignUpActivity", "Successfully uploaded an image: ${it.metadata?.path}")
 
                 ref.downloadUrl.addOnSuccessListener {
-                    it.toString()
-                    Log.d("SignUpActivity", "File location: $it")
-
                     saveUserToFirebaseDatabase(it.toString())
                 }
-                    .addOnFailureListener {
-
-                    }
+                    .addOnFailureListener { }
             }
-            .addOnFailureListener {
-
-            }
+            .addOnFailureListener { }
     }
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
