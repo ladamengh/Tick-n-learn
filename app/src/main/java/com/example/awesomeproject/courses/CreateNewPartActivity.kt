@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
+import com.example.awesomeproject.SaveData
 import com.example.awesomeproject.models.PartOfCourse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -16,8 +17,17 @@ class CreateNewPartActivity : AppCompatActivity() {
 
     val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
+    private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_new_part)
 
@@ -38,18 +48,17 @@ class CreateNewPartActivity : AppCompatActivity() {
 
     private fun createNewPart(courseUid: String) {
         val uid = UUID.randomUUID().toString()
-        val ref = FirebaseDatabase.getInstance().getReference("/course/$courseUid/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/course/$courseUid/parts/$uid")
 
         val titlePart = titleEditTextP.text.toString()
         val imagePartUrl = imagePartUrlEditTextP.text.toString()
         val textPart = textEditTextP.text.toString()
-        val timeStamp = System.currentTimeMillis() / 1000
 
         if (titlePart.isEmpty() || textPart.isEmpty())
         {
             Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
         } else {
-        val coursePart = PartOfCourse(uid, imagePartUrl, titlePart, textPart, timeStamp)
+        val coursePart = PartOfCourse(uid, imagePartUrl, titlePart, textPart)
 
         ref.setValue(coursePart)
             .addOnSuccessListener {

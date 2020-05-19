@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="?attr/backgroundColor"
     tools:context=".auth.SignUpActivity">
 
     <include
@@ -31,7 +31,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Выбрать фотографию"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="?attr/textColor"
             android:textStyle="bold"
             android:background="@android:color/transparent"/>
 
@@ -40,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textColor="?attr/textColor"
         android:hint="Имя пользователя"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textColor="?attr/textColor"
         android:hint="Электронная почта (email)"
         android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
@@ -61,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:textColor="?attr/textColor"
         android:hint="Пароль"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
@@ -71,9 +74,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Зарегистрироваться"
-        android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:background="@android:color/holo_blue_light"
+        android:textColor="?attr/textColor"
+        android:background="?attr/buttonColor"
         android:layout_marginTop="8dp"/>
 
     <TextView
@@ -81,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Уже зарегистрированы?"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="?attr/textColor"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"/>

@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@android:color/white"
+android:background="?attr/backgroundColor"
 tools:context=".auth.MainActivity">
 
 
@@ -19,15 +19,17 @@ tools:context=".auth.MainActivity">
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:background="?attr/buttonColor"
         android:layout_marginTop="250dp"
+        android:textColor="?attr/textColor"
         android:text="Регистрация" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:background="?attr/buttonColor"
+        android:textColor="?attr/textColor"
         android:layout_marginTop="30dp"
         android:text="Авторизация" />
 

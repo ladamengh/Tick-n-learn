@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="?attr/backgroundColor"
     tools:context=".auth.SignUpActivity">
 
     <include
@@ -12,62 +12,73 @@
         layout="@layout/toolbar_layout"/>
 
     <LinearLayout
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:layout_height="0dp"
         android:layout_below="@id/toolbar"
-        android:padding="16dp">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/photoImageViewP"
-            app:civ_border_width="2dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="20dp"
-            android:background="@drawable/select_photo_rounded"/>
-
+            android:background="@drawable/select_photo_rounded"
+            app:civ_border_width="0dp" />
 
         <TextView
             android:id="@+id/usernameTextViewP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            tools:text= "Имя пользователя"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="20sp"
             android:layout_margin="10dp"
-            android:paddingStart="16dp" />
+            android:ems="10"
+            android:paddingStart="16dp"
+            android:textColor="?attr/textColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Имя пользователя" />
 
         <TextView
-            android:id="@+id/emailTextViewP"
+            android:id="@+id/uidTextViewP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:ems="10"
-            tools:text= "Электронная почта"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="20sp"
             android:paddingLeft="16dp"
-            android:layout_margin="10dp"/>
+            android:textColor="?attr/textColor"
+            android:textSize="14sp"
+            tools:text="Идентификатор" />
 
-        <Button
-            android:id="@+id/chatButtonP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Перейти в диалоги"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:background="@android:color/holo_blue_light"
-            android:layout_marginTop="8dp"/>
 
-        <Button
-            android:id="@+id/coursesButtonP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Перейти в доступные курсы"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:background="@android:color/holo_blue_light"
-            android:layout_marginTop="8dp"/>
     </LinearLayout>
-</RelativeLayout>
+
+    <Switch
+        android:id="@+id/switchDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Тёмный режим"
+        android:padding="40dp"
+        android:textColor="?attr/textColor"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/colorPrimaryDark"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

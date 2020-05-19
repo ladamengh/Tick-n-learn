@@ -7,9 +7,4 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_add_dialog"/>
 
-    <item android:id="@+id/menuSignOut"
-        android:title="Sign Out"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_sign_out"/>
-
 </menu>

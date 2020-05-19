@@ -1,5 +1,6 @@
 package com.example.awesomeproject.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 

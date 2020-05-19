@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context="com.example.awesomeproject.messages.ChatLogActivity">
 
     <include
@@ -28,7 +29,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
+        android:textColor="?attr/textColor"
         android:hint="Введите сообщение"
+        android:textColorHint = "?attr/textColor"
+        android:backgroundTint="?attr/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButtonChatLog"
         app:layout_constraintHorizontal_bias="1.0"
@@ -41,8 +45,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Отправить"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/colorPrimary"/>
+        android:background="?attr/buttonColor"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

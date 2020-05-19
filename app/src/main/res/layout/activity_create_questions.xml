@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="?attr/backgroundColor"
     tools:context="com.example.awesomeproject.courses.QuizActivity">
 
     <include
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Номер создаваемого вопроса"
             android:textAlignment="center"
+            android:textColor="?attr/textColor"
             android:textSize="16sp" />
 
         <TextView
@@ -35,6 +37,7 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:textAlignment="center"
+            android:textColor="?attr/textColor"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -54,7 +57,7 @@
             android:id="@+id/createQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:textColor="?attr/textColor"
             android:textAlignment="center"
             android:textSize="20sp"
             android:hint="Введите вопрос" />
@@ -63,7 +66,7 @@
             android:id="@+id/createChoice1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
             android:textSize="16sp"
             android:hint="Первый вариант" />
 
@@ -71,7 +74,7 @@
             android:id="@+id/createChoice2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
             android:textSize="16sp"
             android:hint="Второй вариант" />
 
@@ -79,7 +82,7 @@
             android:id="@+id/createChoice3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
             android:textSize="16sp"
             android:hint="Третий вариант" />
 
@@ -87,7 +90,7 @@
             android:id="@+id/createChoice4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
             android:textSize="16sp"
             android:hint="Четвёртый вариант" />
 
@@ -95,8 +98,9 @@
             android:id="@+id/createAnswer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textAllCaps="false"
+            android:layout_margin="15dp"
+            android:textColor="?attr/textColor"
+            android:textAlignment="center"
             android:textSize="16sp"
             android:hint="Правильный ответ" />
 
@@ -106,9 +110,9 @@
         android:id="@+id/createQuestionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:background="?attr/buttonColor"
         android:text="Сохранить вопрос в тему"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/textColor"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/endCreatingQuestionButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,9 +122,9 @@
         android:id="@+id/endCreatingQuestionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:background="?attr/buttonColor"
         android:text="Завершить создание теста"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/textColor"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

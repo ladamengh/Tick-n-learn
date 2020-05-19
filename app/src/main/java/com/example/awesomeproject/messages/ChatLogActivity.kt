@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
-import com.example.awesomeproject.UserProfileActivity.Companion.currentUser
+import com.example.awesomeproject.SaveData
+import com.example.awesomeproject.SplashScreenActivity.Companion.currentUser
 import com.example.awesomeproject.models.ChatFromItem
 import com.example.awesomeproject.models.ChatMessage
 import com.example.awesomeproject.models.ChatToItem
@@ -23,10 +24,20 @@ class ChatLogActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private var toUser: User? = null
+    private lateinit var saveData: SaveData
 
+    val instance = FirebaseDatabase.getInstance()
     val adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
@@ -50,7 +61,7 @@ class ChatLogActivity : AppCompatActivity() {
     private fun listenForMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val toId = toUser?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
+        val ref = instance.getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onCancelled(p0: DatabaseError) { }
@@ -83,10 +94,10 @@ class ChatLogActivity : AppCompatActivity() {
         val fromId = FirebaseAuth.getInstance().uid
         val toId = user?.uid
 
-        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
-        val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
-        val latestMessageReference = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
-        val toLatestMessageReference = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
+        val reference = instance.getReference("/user-messages/$fromId/$toId").push()
+        val toReference = instance.getReference("/user-messages/$toId/$fromId").push()
+        val latestMessageReference = instance.getReference("/latest-messages/$fromId/$toId")
+        val toLatestMessageReference = instance.getReference("/latest-messages/$toId/$fromId")
 
         val chatMessage = ChatMessage(reference.key!!, text,
             fromId!!, toId!!, System.currentTimeMillis() / 1000) // time in seconds

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
+import com.example.awesomeproject.SaveData
 import com.example.awesomeproject.models.Question
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -16,8 +17,17 @@ class CreateQuestionsActivity : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
     private var mQuestionNumber: Int = 1
+    private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_questions)
 
@@ -38,13 +48,14 @@ class CreateQuestionsActivity : AppCompatActivity() {
         }
 
         endCreatingQuestionButton.setOnClickListener {
+            createNewQuestion(courseUid!!, coursePartUid!!)
             startActivity(Intent(this, CoursesListActivity::class.java))
         }
     }
 
     private fun createNewQuestion(courseUid: String, coursePartUid: String) {
         val ref = FirebaseDatabase.getInstance()
-            .getReference("/course/$courseUid/$coursePartUid/test/question$mQuestionNumber")
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber")
 
         val question = createQuestion.text.toString()
         val choice1 = createChoice1.text.toString()

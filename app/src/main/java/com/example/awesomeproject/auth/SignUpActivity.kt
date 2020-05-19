@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
+import com.example.awesomeproject.SaveData
 import com.example.awesomeproject.UserProfileActivity
 import com.example.awesomeproject.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -23,8 +24,17 @@ class SignUpActivity : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
     var selectedPhotoUri: Uri? = null
+    private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
@@ -64,7 +74,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUpUser() {
 
-        val username = usernameEditTextR!!.text.toString()
         val email = emailEditTextR!!.text.toString()
         val password = passwordEditTextR!!.text.toString()
 
@@ -74,13 +83,8 @@ class SignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("TAG", "createUserWithEmail:success")
-                        val user = auth.currentUser
-
                         uploadImageToFirebaseStorage()
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w("TAG", "createUserWithEmail:failure", task.exception)
                         Toast.makeText(this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()

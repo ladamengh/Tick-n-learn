@@ -8,35 +8,59 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.awesomeproject.R
-import com.example.awesomeproject.auth.LoginActivity
-import com.example.awesomeproject.auth.MainActivity
+import com.example.awesomeproject.SaveData
+import com.example.awesomeproject.UserProfileActivity
+import com.example.awesomeproject.courses.CoursesListActivity
 import com.example.awesomeproject.messages.NewMessageActivity.Companion.USER_KEY
 import com.example.awesomeproject.models.ChatMessage
 import com.example.awesomeproject.models.LatestMessageRow
-import com.example.awesomeproject.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messages.*
+import kotlinx.android.synthetic.main.activity_latest_messages.bottomNavigation
 
 class LatestMessagesActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
+    private lateinit var saveData: SaveData
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
     val latestMessagesMap = HashMap<String, ChatMessage>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
-
-        checkUsersSession()
 
         latestMessagesRecyclerView.adapter = adapter
         latestMessagesRecyclerView.addItemDecoration(
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        bottomNavigation.selectedItemId = R.id.dialogs
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                }
+                R.id.courses -> {
+                    startActivity(Intent(this, CoursesListActivity::class.java))
+                }
+                R.id.dialogs -> {
+                    true
+                }
+            }
+            true
+        }
 
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
@@ -51,16 +75,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.latestMessagesToolbarTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun checkUsersSession() {
-        val uid = FirebaseAuth.getInstance().uid
-        if (uid == null) {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun listenForLatestMessages() {
@@ -99,16 +114,8 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuNewMessage -> startActivity(Intent(this, NewMessageActivity::class.java))
-            R.id.menuSignOut -> signOut()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun signOut() {
-        FirebaseAuth.getInstance().signOut()
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

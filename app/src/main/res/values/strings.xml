@@ -7,5 +7,6 @@
     <string name="createCourseToolbarTitle">Создание нового курса</string>
     <string name="profileToolbarTitle">Ваш профиль</string>
     <string name="coursesToolbarTitle">Доступные курсы</string>
+    <string name="addCourseToolbarTitle">Выбрать новый курс</string>
     <string name="score">Количество очков: </string>
 </resources>

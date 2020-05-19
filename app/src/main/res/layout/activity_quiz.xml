@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="?attr/backgroundColor"
     tools:context="com.example.awesomeproject.courses.QuizActivity">
 
     <include
@@ -27,14 +28,16 @@
             android:layout_height="40dp"
             android:text="@string/score"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="?attr/textColor"/>
 
         <TextView
             android:id="@+id/scoreBar"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="?attr/textColor"/>
 
     </LinearLayout>
 
@@ -54,6 +57,7 @@
             android:padding="10dp"
             android:textSize="28sp"
             tools:text="Question"
+            android:textColor="?attr/textColor"
             android:textAlignment="center"/>
 
         <Button
@@ -62,6 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textSize="24sp"
+            android:textColor="?attr/textColor"
+            android:background="?attr/buttonColor"
             tools:text="Choice 1"
             android:textAllCaps="false"/>
 
@@ -72,6 +78,8 @@
             android:layout_margin="10dp"
             android:textSize="24sp"
             tools:text="Choice 2"
+            android:textColor="?attr/textColor"
+            android:background="?attr/buttonColor"
             android:textAllCaps="false"/>
 
         <Button
@@ -81,6 +89,8 @@
             android:layout_margin="10dp"
             android:textSize="24sp"
             tools:text="Choice 3"
+            android:textColor="?attr/textColor"
+            android:background="?attr/buttonColor"
             android:textAllCaps="false"/>
 
         <Button
@@ -90,6 +100,8 @@
             android:layout_margin="10dp"
             android:textSize="24sp"
             tools:text="Choice 4"
+            android:textColor="?attr/textColor"
+            android:background="?attr/buttonColor"
             android:textAllCaps="false"/>
 
         <Button
@@ -99,6 +111,8 @@
             android:layout_margin="10dp"
             android:textSize="24sp"
             android:textAllCaps="false"
+            android:textColor="?attr/textColor"
+            android:background="?attr/buttonColor"
             android:text="Выйти" />
 
     </LinearLayout>

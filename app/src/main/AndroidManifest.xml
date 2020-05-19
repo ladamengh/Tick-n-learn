@@ -12,19 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".courses.CreateNewPartActivity"></activity>
-        <activity android:name=".courses.FinishTestActivity" />
-        <activity android:name=".courses.CreateQuestionsActivity" />
-        <activity android:name=".courses.QuizActivity" />
-        <activity android:name=".courses.CreateNewCourseActivity" />
-        <activity android:name=".UserProfileActivity">
+        <activity android:name=".courses.ProgressActivity"></activity>
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UserProfileActivity" />
         <activity android:name=".auth.MainActivity" />
+        <activity android:name=".messages.LatestMessagesActivity" />
+        <activity android:name=".courses.CoursesListActivity" />
         <activity
             android:name=".auth.LoginActivity"
             android:parentActivityName=".auth.MainActivity" />
@@ -35,13 +34,28 @@
             android:name=".messages.NewMessageActivity"
             android:parentActivityName=".messages.LatestMessagesActivity" />
         <activity
-            android:name=".messages.LatestMessagesActivity"
-            android:parentActivityName=".UserProfileActivity" />
-        <activity
             android:name=".messages.ChatLogActivity"
             android:parentActivityName=".messages.LatestMessagesActivity" />
-        <activity android:name=".courses.NewCourseActivity" />
-        <activity android:name=".courses.CoursesListActivity" />
+        <activity
+            android:name=".courses.CoursePartActivity"
+            android:parentActivityName=".courses.CoursesListActivity" />
+        <activity
+            android:name=".courses.InfoActivity"
+            android:parentActivityName=".courses.CoursePartActivity" />
+        <activity
+            android:name=".courses.QuizActivity"
+            android:parentActivityName=".courses.InfoActivity" />
+        <activity
+            android:name=".courses.FinishTestActivity"/>
+        <activity
+            android:name=".courses.CreateNewCourseActivity"
+            android:parentActivityName=".courses.CoursesListActivity" />
+        <activity
+            android:name=".courses.CreateNewPartActivity"
+            android:parentActivityName=".courses.CreateNewCourseActivity" />
+        <activity
+            android:name=".courses.CreateQuestionsActivity"
+            android:parentActivityName=".courses.CreateNewPartActivity" />
     </application>
 
 </manifest>
