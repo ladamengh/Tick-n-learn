@@ -3,8 +3,12 @@ package com.example.awesomeproject.courses
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -29,6 +33,7 @@ class CoursesListActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var saveData: SaveData
     private var instance = FirebaseDatabase.getInstance()
+    private var uid = FirebaseAuth.getInstance().currentUser?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,6 +43,8 @@ class CoursesListActivity : AppCompatActivity() {
         } else {
             setTheme(R.style.AppTheme)
         }
+
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_courses_list)
@@ -51,6 +58,8 @@ class CoursesListActivity : AppCompatActivity() {
         yourCoursesRecyclerView.addItemDecoration(
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         )
+
+        checkAdmin()
 
         bottomNavigation.selectedItemId = R.id.courses
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
@@ -145,7 +154,33 @@ class CoursesListActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    private fun checkAdmin() {
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val adminsRef = rootRef.child("admins")
+        val valueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    val value = ds.getValue(String::class.java)
+                    if(value.equals(uid)) {
+                        Toast.makeText(baseContext, "Visible", Toast.LENGTH_SHORT).show()
+                        createNewButton.visibility = View.VISIBLE
+                        break
+                    } else {
+                        Toast.makeText(baseContext, "Invisible", Toast.LENGTH_SHORT).show()
+                        createNewButton.isEnabled = false
+                        createNewButton.visibility = View.INVISIBLE
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.getMessage()) //Don't ignore errors!
+            }
+        }
+        adminsRef.addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_courses, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -155,5 +190,5 @@ class CoursesListActivity : AppCompatActivity() {
             R.id.menuNewCourse -> startActivity(Intent(this, CreateNewCourseActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 }

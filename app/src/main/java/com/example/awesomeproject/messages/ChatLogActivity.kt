@@ -48,7 +48,7 @@ class ChatLogActivity : AppCompatActivity() {
         toUser = intent.getParcelableExtra(NewMessageActivity.USER_KEY)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(toUser?.username)
+        supportActionBar?.title = toUser?.username
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         listenForMessages()

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AwesomeProject</string>
+    <string name="app_name">Tick-n-Learn</string>
     <string name="loginToolbarTitle">Авторизация</string>
     <string name="signUpToolbarTitle">Регистрация</string>
     <string name="latestMessagesToolbarTitle">Диалоги</string>

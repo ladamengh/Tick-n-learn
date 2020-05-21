@@ -18,6 +18,9 @@
         android:hint="Поиск"
         android:paddingLeft="16dp"
         android:textColor="?attr/textColor"
+        android:textColorHint = "?attr/textColor"
+        android:backgroundTint="?attr/textColor"
+        android:focusedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />

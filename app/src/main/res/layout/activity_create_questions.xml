@@ -58,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:textAlignment="center"
             android:textSize="20sp"
             android:hint="Введите вопрос" />
@@ -67,6 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:textSize="16sp"
             android:hint="Первый вариант" />
 
@@ -75,6 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:textSize="16sp"
             android:hint="Второй вариант" />
 
@@ -83,6 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:textSize="16sp"
             android:hint="Третий вариант" />
 
@@ -91,6 +99,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:textSize="16sp"
             android:hint="Четвёртый вариант" />
 
@@ -100,6 +110,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:textAlignment="center"
             android:textSize="16sp"
             android:hint="Правильный ответ" />

@@ -3,6 +3,7 @@ package com.example.awesomeproject.courses
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -26,6 +27,10 @@ class QuizActivity : AppCompatActivity() {
     private var mQuestionNumber: Int = 1
     private var instance = FirebaseDatabase.getInstance()
     private lateinit var saveData: SaveData
+    private var gameStarted: Boolean = false
+    private lateinit var countDownTimer: CountDownTimer
+    private var initialCountDown: Long = 30000
+    private var countDownInterval: Long = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,9 +54,11 @@ class QuizActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = coursePartTitle
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         updateQuestion()
+        resetTimer()
+        startTimer()
 
         scoreBar.text = mScore.toString()
 
@@ -61,24 +68,50 @@ class QuizActivity : AppCompatActivity() {
         buttonChoice4.setOnClickListener { buttonOnClick(buttonChoice4) }
     }
 
+    private fun resetTimer() {
+        val initialTimeLeft = initialCountDown / 1000
+
+        timeBar.text = initialTimeLeft.toString()
+        countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval) {
+            override fun onFinish() {
+                Toast.makeText(baseContext, "Время вышло!", Toast.LENGTH_LONG).show()
+                updateQuestion()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                val timeLeft = millisUntilFinished / 1000
+                timeBar.text = timeLeft.toString()
+            }
+        }
+        gameStarted = false
+    }
+
     private fun buttonOnClick(buttonChoice: Button) {
+        countDownTimer.cancel()
         if (buttonChoice.text == mAnswer) {
-            // сделать стиль кнопки
-            //buttonChoice.background = getResources(getColor(R.color.colorGreen)))
+            buttonChoice.setBackgroundResource(R.color.colorGreen)
             Toast.makeText(this, "Верно", Toast.LENGTH_SHORT).show()
-            mScore++
             updateScore()
 
             if (mQuestionNumber <= countQuestions) {
                 updateQuestion()
+                resetTimer()
+                if (!gameStarted) {
+                    startTimer()
+                }
             } else {
                 finishTest()
             }
         } else {
+            buttonChoice.setBackgroundResource(R.color.colorRed)
             Toast.makeText(this, "Неверно", Toast.LENGTH_SHORT).show()
 
             if (mQuestionNumber <= countQuestions) {
                 updateQuestion()
+                resetTimer()
+                if (!gameStarted) {
+                    startTimer()
+                }
             } else {
                 finishTest()
             }
@@ -106,6 +139,7 @@ class QuizActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val choice = p0.value.toString()
+                buttonChoice1.setBackgroundResource(R.color.colorButton)
                 buttonChoice1.text = choice
             }
         })
@@ -118,6 +152,7 @@ class QuizActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val choice = p0.value.toString()
+                buttonChoice2.setBackgroundResource(R.color.colorButton)
                 buttonChoice2.text = choice
             }
         })
@@ -130,6 +165,7 @@ class QuizActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val choice = p0.value.toString()
+                buttonChoice3.setBackgroundResource(R.color.colorButton)
                 buttonChoice3.text = choice
             }
         })
@@ -142,6 +178,7 @@ class QuizActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val choice = p0.value.toString()
+                buttonChoice4.setBackgroundResource(R.color.colorButton)
                 buttonChoice4.text = choice
             }
         })
@@ -179,7 +216,13 @@ class QuizActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun startTimer() {
+        countDownTimer.start()
+        gameStarted = true
+    }
+
     private fun updateScore() {
+        mScore++
         scoreBar.text = mScore.toString()
     }
 }

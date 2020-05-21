@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Название"
-            android:inputType="textPersonName"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:paddingLeft="16dp"
             app:met_floatingLabel="normal"
             android:textColor="?attr/textColor"/>
@@ -44,6 +45,8 @@
             android:layout_height="60dp"
             android:ems="10"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:hint="Изображение для курса (URL)"
             android:paddingLeft="16dp"
             app:met_floatingLabel="normal" />
@@ -54,6 +57,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
             android:hint="Краткое описание"
             android:paddingLeft="16dp"
             app:met_floatingLabel="normal" />

@@ -1,13 +1,17 @@
 package com.example.awesomeproject
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import com.example.awesomeproject.auth.MainActivity
+import com.example.awesomeproject.courses.CoursesListActivity
 import com.example.awesomeproject.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -38,7 +42,6 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash_screen)
 
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation)
@@ -47,9 +50,23 @@ class SplashScreenActivity : AppCompatActivity() {
         splashImageView.setAnimation(topAnim)
         splashName.animation = bottomAnim
 
+        val cm = baseContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = cm.activeNetworkInfo
+
+        if (networkInfo != null && networkInfo.isConnected) {
+            Toast.makeText(baseContext, "Интернет", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(baseContext, "Нет Интернета", Toast.LENGTH_LONG).show()
+        }
+
         Handler().postDelayed(object: Runnable {
             override fun run() {
-                checkUsersSession()
+                if (networkInfo != null && networkInfo.isConnected) {
+                    checkUsersSession()
+                } else {
+                    Toast.makeText(baseContext, "Нет Интернета", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(baseContext, CoursesListActivity::class.java))
+                }
             }
         }, SPLASH_SCREEN)
     }

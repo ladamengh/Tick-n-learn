@@ -13,107 +13,145 @@
         layout="@layout/toolbar_layout" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutScore"
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayoutTime"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutQuestion"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
+            android:id="@+id/timeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Секунд осталось"
+            android:textAlignment="center"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/timeBar"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            android:text = "15"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTime">
+
+        <TextView
             android:id="@+id/score"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/score"
             android:textAlignment="center"
-            android:textSize="24sp"
-            android:textColor="?attr/textColor"/>
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/scoreBar"
             android:layout_width="50dp"
             android:layout_height="40dp"
+            android:text = "0"
             android:textAlignment="center"
-            android:textSize="24sp"
-            android:textColor="?attr/textColor"/>
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutScore"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/questionQuiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:textSize="28sp"
-            tools:text="Question"
+            android:textAlignment="center"
             android:textColor="?attr/textColor"
-            android:textAlignment="center"/>
+            android:textSize="28sp"
+            tools:text="Question" />
 
         <Button
             android:id="@+id/buttonChoice1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="24sp"
-            android:textColor="?attr/textColor"
             android:background="?attr/buttonColor"
-            tools:text="Choice 1"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp"
+            tools:text="Choice 1" />
 
         <Button
             android:id="@+id/buttonChoice2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="24sp"
-            tools:text="Choice 2"
-            android:textColor="?attr/textColor"
             android:background="?attr/buttonColor"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp"
+            tools:text="Choice 2" />
 
         <Button
             android:id="@+id/buttonChoice3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="24sp"
-            tools:text="Choice 3"
-            android:textColor="?attr/textColor"
             android:background="?attr/buttonColor"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp"
+            tools:text="Choice 3" />
 
         <Button
             android:id="@+id/buttonChoice4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="24sp"
-            tools:text="Choice 4"
-            android:textColor="?attr/textColor"
             android:background="?attr/buttonColor"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp"
+            tools:text="Choice 4" />
 
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="24sp"
+            android:background="?attr/buttonColor"
+            android:text="Выйти"
             android:textAllCaps="false"
             android:textColor="?attr/textColor"
-            android:background="?attr/buttonColor"
-            android:text="Выйти" />
+            android:textSize="24sp" />
 
     </LinearLayout>
 
