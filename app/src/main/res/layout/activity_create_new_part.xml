@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
-    tools:context=".courses.CreateNewCourseActivity">
+    tools:context=".courses.CreateNewPartActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -30,7 +30,7 @@
 
             android:background="@mipmap/ic_book_foreground" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/titleEditTextP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,10 +42,9 @@
             android:paddingLeft="16dp"
 
             android:textColor="?attr/textColor"
-            android:textColorHint="?attr/textColor"
-            app:met_floatingLabel="normal" />
+            android:textColorHint="?attr/textColor" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/imagePartUrlEditTextP"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -56,10 +55,9 @@
             android:paddingLeft="16dp"
 
             android:textColor="?attr/textColor"
-            android:textColorHint="?attr/textColor"
-            app:met_floatingLabel="normal" />
+            android:textColorHint="?attr/textColor" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/textEditTextP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,8 +69,7 @@
             android:paddingLeft="16dp"
 
             android:textColor="?attr/textColor"
-            android:textColorHint="?attr/textColor"
-            app:met_floatingLabel="normal" />
+            android:textColorHint="?attr/textColor" />
 
     </LinearLayout>
 
@@ -81,18 +78,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_margin="30dp"
-        android:background="?attr/buttonColor"
         android:text="@string/goToCreatingTests"
         android:textColor="?attr/textColor"
         android:textAllCaps="false"
-
         android:textStyle="bold"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_margin="30dp"
+        android:background="?attr/buttonColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutPart" />
+
+    <TextView
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/cancel"
+        android:textColor="?attr/hintColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createPartButtonP" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

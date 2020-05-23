@@ -25,6 +25,7 @@ class FinishTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_finish_test)
 
         setTools()
+        goBackTextView.setOnClickListener { goBack() }
     }
 
     private fun setTheme() {
@@ -51,13 +52,12 @@ class FinishTestActivity : AppCompatActivity() {
 
         scoreBar.text = score
         questionNum.text = numQuestions
-
-        goBackTextView.setOnClickListener {
-            val intent = Intent(Intent(this, CoursePartActivity::class.java))
-            intent.putExtra("courseUid", courseUid)
-            intent.putExtra("coursePartUid", coursePartUid)
-            intent.putExtra("coursePartTitle", coursePartTitle)
-            startActivity(intent)
-        }
+    }
+    private fun goBack() {
+        val intent = Intent(Intent(this, InfoActivity::class.java))
+        intent.putExtra("courseUid", courseUid)
+        intent.putExtra("coursePartUid", coursePartUid)
+        intent.putExtra("coursePartTitle", coursePartTitle)
+        startActivity(intent)
     }
 }

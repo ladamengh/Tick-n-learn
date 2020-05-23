@@ -31,14 +31,9 @@ class CreateQuestionsActivity : AppCompatActivity() {
         setTools()
         updateQuestionNumber(questionNumber)
 
-        createQuestionButton.setOnClickListener {
-            createNewQuestion()
-        }
+        createQuestionButton.setOnClickListener { createNewQuestion() }
 
-        endCreatingQuestionButton.setOnClickListener {
-            createNewQuestion()
-            startActivity(Intent(this, CoursesListActivity::class.java))
-        }
+        endCreatingQuestionButton.setOnClickListener { endQuestions() }
     }
 
     private fun setTheme() {
@@ -61,6 +56,7 @@ class CreateQuestionsActivity : AppCompatActivity() {
     private fun createNewQuestion() {
         courseUid = intent.getStringExtra("courseUid") ?: ""
         coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
+
         val ref = FirebaseDatabase.getInstance()
             .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber")
 
@@ -102,6 +98,13 @@ class CreateQuestionsActivity : AppCompatActivity() {
 
     private fun updateQuestionNumber(questionNumber: Int) {
         numberQBar.text = questionNumber.toString()
+    }
+
+    private fun endQuestions() {
+        val intent = Intent(this, CreateNewPartActivity::class.java)
+        intent.putExtra("courseUid", courseUid)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }
 

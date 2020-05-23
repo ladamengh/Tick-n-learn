@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
-    tools:context=".auth.SignUpActivity">
+    tools:context=".UserProfileActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -35,31 +35,64 @@
             android:background="@drawable/select_photo_rounded" />
 
         <TextView
-            android:id="@+id/usernameTextViewP"
+            android:id="@+id/usernameLabelTextViewP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:hint="@string/username"
+            android:textColorHint="?attr/hintColor"
+            android:ems="10"
+            android:textSize="12sp"
+            android:textStyle="bold"
+
+            android:paddingStart="16dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/usernameTextViewP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            tools:text="@string/username"
             android:ems="10"
             android:textColor="?attr/textColor"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textIsSelectable="true"
 
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:paddingStart="16dp" />
+
+        <TextView
+            android:id="@+id/uidLabelTextViewP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/uid"
+            android:textColorHint="?attr/hintColor"
+            android:ems="10"
+            android:textSize="12sp"
+            android:textStyle="bold"
+
+            android:paddingStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/uidTextViewP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:hint="@string/uid"
+            tools:text="@string/uid"
             android:ems="10"
             android:textColor="?attr/textColor"
             android:textSize="14sp"
+            android:textIsSelectable="true"
 
-            android:paddingLeft="16dp"
-            android:layout_margin="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingStart="16dp"/>
 
     </LinearLayout>
 

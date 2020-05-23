@@ -1,6 +1,7 @@
 package com.example.awesomeproject.courses
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,6 +22,7 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var coursePartUid: String
     private lateinit var coursePartTitle: String
     private lateinit var currentUserUid: String
+    private var timeLeft: Long = 0L
     private var countQuestions: Int = 0
     private var score: Int = 0
     private var answer: String? = null
@@ -36,9 +38,10 @@ class QuizActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        setTools()
         updateQuestion()
+        setTools()
         resetTimer()
         startTimer()
 
@@ -46,6 +49,7 @@ class QuizActivity : AppCompatActivity() {
         buttonChoice2.setOnClickListener { buttonOnClick(buttonChoice2) }
         buttonChoice3.setOnClickListener { buttonOnClick(buttonChoice3) }
         buttonChoice4.setOnClickListener { buttonOnClick(buttonChoice4) }
+        buttonCancel.setOnClickListener { stopTest() }
     }
 
     private fun setTools() {
@@ -56,6 +60,7 @@ class QuizActivity : AppCompatActivity() {
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = coursePartTitle
     }
 
@@ -74,7 +79,7 @@ class QuizActivity : AppCompatActivity() {
         timeBar.text = initialTimeLeft.toString()
         countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
-                val timeLeft = millisUntilFinished / 1000
+                timeLeft = millisUntilFinished / 1000
                 timeBar.text = timeLeft.toString()
             }
             override fun onFinish() {
@@ -89,7 +94,6 @@ class QuizActivity : AppCompatActivity() {
         countDownTimer.cancel()
         if (buttonChoice.text == answer) {
             buttonChoice.setBackgroundResource(R.color.colorGreen)
-            Toast.makeText(this, R.string.trueA, Toast.LENGTH_SHORT).show()
             updateScore()
 
             if (questionNumber <= countQuestions) {
@@ -103,7 +107,6 @@ class QuizActivity : AppCompatActivity() {
             }
         } else {
             buttonChoice.setBackgroundResource(R.color.colorRed)
-            Toast.makeText(this, R.string.falseA, Toast.LENGTH_SHORT).show()
 
             if (questionNumber <= countQuestions) {
                 updateQuestion()
@@ -214,6 +217,14 @@ class QuizActivity : AppCompatActivity() {
             .getReference("/course/$courseUid/parts/$coursePartUid/score/$currentUserUid")
 
         saveScoreRef.setValue(ScoreItem(currentUserUid, coursePartUid, score, coursePartTitle))
+    }
+
+    private fun stopTest() {
+        val intent = Intent(Intent(this, InfoActivity::class.java))
+        intent.putExtra("courseUid", courseUid)
+        intent.putExtra("coursePartUid", coursePartUid)
+        intent.putExtra("coursePartTitle", coursePartTitle)
+        startActivity(intent)
     }
 
     private fun finishTest() {

@@ -17,6 +17,18 @@
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar_layout"/>
 
+            <TextView
+                android:id="@+id/goBackTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/themeList"
+                android:textColor="?attr/hintColor"
+                android:textStyle="bold"
+                android:textSize="18sp"
+
+                android:layout_margin="8dp"/>
+
             <ImageView
                 android:id="@+id/infoImageView"
                 android:layout_width="300dp"
@@ -33,6 +45,7 @@
 
                 tools:text = "text"
                 android:textColor="?attr/textColor"
+                android:textIsSelectable="true"
                 android:padding="20dp" />
 
             <Button

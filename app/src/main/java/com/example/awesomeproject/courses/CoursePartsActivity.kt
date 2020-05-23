@@ -19,7 +19,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_course_part.*
 
-class CoursePartActivity : AppCompatActivity() {
+class CoursePartsActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var coursePartUid: String
@@ -36,15 +36,19 @@ class CoursePartActivity : AppCompatActivity() {
 
         setTools()
         fetchParts()
+
+        goBackCourse.setOnClickListener {
+            startActivity(Intent(this, CoursesListActivity::class.java))
+        }
     }
 
     private fun setTools() {
-        courseTitle = intent.getStringExtra("courseTitle") ?: "courseTitle"
+        courseTitle = intent.getStringExtra("courseTitle") ?: ""
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = courseTitle
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         recyclerViewNewCoursePart.addItemDecoration(
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
@@ -61,7 +65,7 @@ class CoursePartActivity : AppCompatActivity() {
     }
 
     private fun fetchParts() {
-        courseUid = intent.getStringExtra("courseUid") ?: "courseUid"
+        courseUid = intent.getStringExtra("courseUid") ?: ""
 
         val ref = instance.getReference("/course/$courseUid/parts/")
 

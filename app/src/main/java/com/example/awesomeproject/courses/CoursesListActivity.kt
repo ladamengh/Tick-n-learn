@@ -45,6 +45,10 @@ class CoursesListActivity : AppCompatActivity() {
         searchText.doOnTextChanged { _, _, _, _ ->
             searchCourse(searchText.text.toString().trim())
         }
+
+        createNewButton.setOnClickListener {
+            startActivity(Intent(this, CreateNewCourseActivity::class.java))
+        }
     }
 
     private fun setTools() {
@@ -105,7 +109,7 @@ class CoursesListActivity : AppCompatActivity() {
                 adapter.setOnItemClickListener { item, view ->
 
                     val courseItem = item as CourseItem
-                    val intent = Intent(view.context, CoursePartActivity::class.java)
+                    val intent = Intent(view.context, CoursePartsActivity::class.java)
                     intent.putExtra("courseUid", courseItem.course.uid)
                     intent.putExtra("courseTitle", courseItem.course.title)
                     startActivity(intent)
@@ -144,7 +148,7 @@ class CoursesListActivity : AppCompatActivity() {
                     adapter.setOnItemClickListener { item, view ->
 
                         val courseItem = item as CourseItem
-                        val intent = Intent(view.context, CoursePartActivity::class.java)
+                        val intent = Intent(view.context, CoursePartsActivity::class.java)
                         intent.putExtra("courseUid", courseItem.course.uid)
                         intent.putExtra("courseTitle", courseItem.course.title)
                         startActivity(intent)

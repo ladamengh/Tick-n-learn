@@ -10,6 +10,7 @@
         <item name="backgroundColor">#FFF</item>
         <item name="textColor">#000000</item>
         <item name="buttonColor">#3949AB</item>
+        <item name="hintColor">@android:color/darker_gray</item>
 
         <item name="backgroundMessageColor">@color/colorPrimary</item>
         <item name="toolbarColor">#00ACC1</item>
@@ -27,6 +28,7 @@
         <item name="backgroundColor">#000</item>
         <item name="textColor">#FFF</item>
         <item name="buttonColor">#3949AB</item>
+        <item name="hintColor">@android:color/darker_gray</item>
 
         <item name="backgroundMessageColor">#1E4940</item>
         <item name="toolbarColor">#03344C</item>

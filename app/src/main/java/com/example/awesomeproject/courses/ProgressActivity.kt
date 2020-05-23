@@ -1,5 +1,6 @@
 package com.example.awesomeproject.courses
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -37,6 +38,8 @@ class ProgressActivity : AppCompatActivity() {
 
         setTools()
         listenForProgress()
+
+        goBackThemeP.setOnClickListener { goToTheme() }
     }
 
     private fun setTheme() {
@@ -94,5 +97,11 @@ class ProgressActivity : AppCompatActivity() {
                 throw error.toException()
             }
         })
+    }
+
+    private fun goToTheme() {
+        val intent = Intent(Intent(this, CoursePartsActivity::class.java))
+        intent.putExtra("courseUid", courseUid)
+        startActivity(intent)
     }
 }

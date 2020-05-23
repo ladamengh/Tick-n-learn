@@ -32,7 +32,7 @@
 
             android:background="@mipmap/ic_book_foreground" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/titleEditTextC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,10 +43,9 @@
             android:textColorHint="?attr/textColor"
 
             android:paddingLeft="16dp"
-            app:met_floatingLabel="normal"
             android:backgroundTint="?attr/textColor"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/imageUrlEditTextC"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -57,10 +56,9 @@
             android:textColorHint="?attr/textColor"
 
             android:paddingLeft="16dp"
-            app:met_floatingLabel="normal"
             android:backgroundTint="?attr/textColor"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/descriptionEditTextC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +69,6 @@
             android:ems="10"
 
             android:paddingLeft="16dp"
-            app:met_floatingLabel="normal"
             android:backgroundTint="?attr/textColor"/>
 
         <Button
@@ -86,6 +83,18 @@
 
             android:layout_margin="30dp"
             android:background="?attr/buttonColor"/>
+
+        <TextView
+            android:id="@+id/cancelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/cancel"
+            android:textColor="?attr/hintColor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            android:layout_margin="8dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@
             android:textColor="?attr/textColor"
             android:textStyle="bold" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/usernameEditTextR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,10 +47,9 @@
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
 
-            android:paddingLeft="16dp"
-            app:met_floatingLabel="normal"/>
+            android:paddingLeft="16dp"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/emailEditTextR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,10 +60,9 @@
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
 
-            android:paddingLeft="16dp"
-            app:met_floatingLabel="normal"/>
+            android:paddingLeft="16dp"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/passwordEditTextR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,8 +74,7 @@
             android:backgroundTint="?attr/textColor"
 
             android:layout_marginTop="8dp"
-            android:paddingLeft="16dp"
-            app:met_floatingLabel="normal"/>
+            android:paddingLeft="16dp"/>
 
         <Button
             android:id="@+id/registerButtonR"

@@ -160,16 +160,17 @@
             android:textSize="24sp"
             tools:text="Choice 4" />
 
-        <Button
+        <TextView
             android:id="@+id/buttonCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="?attr/buttonColor"
-            android:text="Выйти"
+
+            android:text="@string/out"
             android:textAllCaps="false"
             android:textColor="?attr/textColor"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:gravity="center"/>
 
     </LinearLayout>
 

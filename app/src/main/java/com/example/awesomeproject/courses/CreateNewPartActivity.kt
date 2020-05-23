@@ -18,6 +18,7 @@ class CreateNewPartActivity : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
     private lateinit var saveData: SaveData
+    private lateinit var courseUid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme()
@@ -27,10 +28,9 @@ class CreateNewPartActivity : AppCompatActivity() {
 
         setTools()
 
-        createPartButtonP.setOnClickListener {
-            createNewPart()
-            startActivity(Intent(this, CreateQuestionsActivity::class.java))
-        }
+        createPartButtonP.setOnClickListener { createNewPart() }
+
+        cancelButton.setOnClickListener { cancelCreating() }
     }
 
     private fun setTheme() {
@@ -52,7 +52,7 @@ class CreateNewPartActivity : AppCompatActivity() {
     }
 
     private fun createNewPart() {
-        val courseUid = intent.getStringExtra("courseUid") ?: ""
+        courseUid = intent.getStringExtra("courseUid") ?: ""
         val uid = UUID.randomUUID().toString()
         val ref = FirebaseDatabase.getInstance().getReference("/course/$courseUid/parts/$uid")
 
@@ -62,7 +62,7 @@ class CreateNewPartActivity : AppCompatActivity() {
 
         if (titlePart.isEmpty() || textPart.isEmpty())
         {
-            Toast.makeText(this, R.string.allFields, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.fieldsTitleInfo, Toast.LENGTH_SHORT).show()
         } else {
         val coursePart = PartOfCourse(uid, imagePartUrl, titlePart, textPart)
 
@@ -79,5 +79,11 @@ class CreateNewPartActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun cancelCreating() {
+        val intent = Intent(this, CoursesListActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

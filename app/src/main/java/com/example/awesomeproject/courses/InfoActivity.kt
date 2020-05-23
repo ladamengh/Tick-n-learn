@@ -32,9 +32,8 @@ class InfoActivity : AppCompatActivity() {
         setInfo()
         countQuestions()
 
-        goToQuizButton.setOnClickListener {
-            goToQuiz()
-        }
+        goToQuizButton.setOnClickListener { goToQuiz() }
+        goBackTheme.setOnClickListener { goToTheme() }
     }
 
     private fun setTheme() {
@@ -47,16 +46,17 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun setTools() {
-        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: "Title"
+        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: ""
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.title = coursePartTitle
     }
 
     private fun setInfo() {
-        courseUid = intent.getStringExtra("courseUid") ?: "courseUid"
-        coursePartUid = intent.getStringExtra("coursePartUid") ?: "coursePartUid"
+        courseUid = intent.getStringExtra("courseUid") ?: ""
+        coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
 
         val ref = FirebaseDatabase.getInstance()
             .getReference("/course/$courseUid/parts/$coursePartUid")
@@ -105,6 +105,12 @@ class InfoActivity : AppCompatActivity() {
         intent.putExtra("coursePartUid", coursePartUid)
         intent.putExtra("coursePartTitle", coursePartTitle)
         intent.putExtra("countedQuestions", countQuestions)
+        startActivity(intent)
+    }
+
+    private fun goToTheme() {
+        val intent = Intent(Intent(this, CoursePartsActivity::class.java))
+        intent.putExtra("courseUid", courseUid)
         startActivity(intent)
     }
 }

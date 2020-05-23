@@ -1,10 +1,13 @@
 package com.example.awesomeproject.messages
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.awesomeproject.R
@@ -37,8 +40,10 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         listenForLatestMessages()
         setTools()
+        checkConnection()
         setNavigation()
     }
+
 
     private fun setTheme() {
         saveData = SaveData(this)
@@ -47,6 +52,24 @@ class LatestMessagesActivity : AppCompatActivity() {
         } else {
             setTheme(R.style.AppTheme)
         }
+    }
+
+    private fun checkConnection() {
+        val cm = baseContext
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = cm.activeNetworkInfo
+
+        val con = networkInfo != null && networkInfo.isConnected
+
+        if (!con) {
+            popUpScreen.visibility = View.VISIBLE
+            popUpScreen.setOnClickListener {
+                popUpScreen.visibility = View.GONE
+            }
+        } else {
+            popUpScreen.visibility = View.GONE
+        }
+
     }
 
     private fun setTools() {

@@ -33,13 +33,9 @@ class CreateNewCourseActivity : AppCompatActivity() {
 
         setTools()
 
-        createCourseButtonC.setOnClickListener {
-            createNewCourse()
-        }
+        createCourseButtonC.setOnClickListener { createNewCourse() }
 
-        /*cancelTextViewC.setOnClickListener {
-            startActivity(Intent(this, CoursesListActivity::class.java))
-        }*/
+        cancelText.setOnClickListener { cancelCreating() }
     }
 
     private fun setTheme() {
@@ -84,5 +80,11 @@ class CreateNewCourseActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun cancelCreating() {
+        val intent = Intent(this, CoursesListActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

@@ -38,11 +38,11 @@
             android:name=".messages.ChatLogActivity"
             android:parentActivityName=".messages.LatestMessagesActivity" />
         <activity
-            android:name=".courses.CoursePartActivity"
+            android:name=".courses.CoursePartsActivity"
             android:parentActivityName=".courses.CoursesListActivity" />
         <activity
             android:name=".courses.InfoActivity"
-            android:parentActivityName=".courses.CoursePartActivity" />
+            android:parentActivityName=".courses.CoursePartsActivity" />
         <activity
             android:name=".courses.QuizActivity"
             android:parentActivityName=".courses.InfoActivity" />
@@ -59,7 +59,7 @@
             android:name=".courses.CreateQuestionsActivity"
             android:parentActivityName=".courses.CreateNewPartActivity" />
         <activity android:name=".courses.ProgressActivity"
-            android:parentActivityName=".courses.CoursePartActivity"/>
+            android:parentActivityName=".courses.CoursePartsActivity"/>
     </application>
 
 </manifest>

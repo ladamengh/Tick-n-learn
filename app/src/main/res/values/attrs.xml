@@ -7,6 +7,7 @@
         <attr name="toolbarColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="buttonColor" format="color"/>
+        <attr name="hintColor" format="color"/>
     </declare-styleable>
 
 </resources>

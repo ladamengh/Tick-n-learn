@@ -49,7 +49,8 @@
     <string name="fourthChoice">Четвёртый вариант</string>
     <string name="answer">Правильный ответ</string>
     <string name="saveQuestion">Добавить в тест</string>
-    <string name="endCreating">Завершить создание теста</string>
+    <string name="endCreating">Завершить создание теста к этой теме</string>
+    <string name="fieldsTitleInfo">Поля с названием и информацией обязательны</string>
     <string name="yourResult">Ваш результат</string>
     <string name="_0">0</string>
     <string name="outOf">из</string>
@@ -61,9 +62,15 @@
     <string name="infoText">Обучающий текстовый материал</string>
     <string name="goToCreatingTests">Перейти к созданию тестов по теме</string>
     <string name="goToTest">Пройти тест</string>
-    <string name="testMessage">Text message cool message awesome message testing</string>
+    <string name="testMessage">Тестовое сообщение</string>
     <string name="plus">+</string>
     <string name="uid">Идентификатор</string>
     <string name="darkMode">Тёмный режим</string>
+    <string name="close">Нажмите, чтобы закрыть</string>
+    <string name="noInternetPopUp">При отсутствии интернет-соединения сообщения будут сохраняться в памяти телефона, и получатель получит их при последующем подключении.</string>
+    <string name="out">Выйти</string>
+    <string name="themeList"><![CDATA[< Список тем]]></string>
+    <string name="goBackToCourse"><![CDATA[< Список курсов]]></string>
+    <string name="cancel">Отмена</string>
 
 </resources>
