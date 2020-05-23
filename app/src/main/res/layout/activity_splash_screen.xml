@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="?attr/backgroundColor"
     tools:context="com.example.awesomeproject.SplashScreenActivity">
 
     <ImageView
@@ -13,6 +13,7 @@
         android:layout_height="250dp"
 
         android:src="@mipmap/ic_logo_foreground"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,16 +23,19 @@
         android:id="@+id/splashName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif-monospace"
-        android:text="Tick-n-learn"
+
+        android:text="@string/app_name"
+        android:fontFamily="serif"
         android:textAlignment="center"
         android:textColor="#6A1B9A"
         android:textSize="40sp"
         android:textStyle="bold"
+
+        app:layout_constraintVertical_bias="0.2"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splashImageView"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/splashImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

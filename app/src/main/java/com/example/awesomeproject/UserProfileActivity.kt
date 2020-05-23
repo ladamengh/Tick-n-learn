@@ -24,27 +24,29 @@ import kotlinx.android.synthetic.main.activity_user_profile.*
 class UserProfileActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
-    private val switch: Switch? = null
     private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_user_profile)
+
+        switchTheme()
+        setTools()
+        setNavigation()
+    }
+
+    private fun setTheme() {
         saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
+    }
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_profile)
-
-        toolbar = findViewById(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.profileToolbarTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
+    private fun switchTheme() {
         if (saveData.loadDarkModeState() == true) {
             switchDark.isChecked = true
         }
@@ -56,6 +58,13 @@ class UserProfileActivity : AppCompatActivity() {
             }
             restartApplication()
         }
+    }
+
+    private fun setTools() {
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setTitle(R.string.profileToolbarTitle)
 
         val uid = intent.getStringExtra("userUid")
         val username = intent.getStringExtra("username")
@@ -67,11 +76,14 @@ class UserProfileActivity : AppCompatActivity() {
         } else {
             setUser(uid, username!!, profileImage!!)
         }
+    }
+
+    private fun setNavigation() {
         bottomNavigation.selectedItemId = R.id.profile
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.profile -> {
-                    true
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                 }
                 R.id.courses -> {
                     startActivity(Intent(this, CoursesListActivity::class.java))
@@ -112,6 +124,11 @@ class UserProfileActivity : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_profile, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuSignOut -> signOut()
@@ -124,10 +141,5 @@ class UserProfileActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_profile, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 }

@@ -21,46 +21,26 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var coursePartUid: String
     private lateinit var coursePartTitle: String
     private lateinit var currentUserUid: String
-    private var countQuestions: Long = 0
-    private var mScore: Int = 0
-    private var mAnswer: String? = null
-    private var mQuestionNumber: Int = 1
+    private var countQuestions: Int = 0
+    private var score: Int = 0
+    private var answer: String? = null
+    private var questionNumber: Int = 1
     private var instance = FirebaseDatabase.getInstance()
-    private lateinit var saveData: SaveData
     private var gameStarted: Boolean = false
     private lateinit var countDownTimer: CountDownTimer
     private var initialCountDown: Long = 30000
     private var countDownInterval: Long = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        saveData = SaveData(this)
-        if (saveData.loadDarkModeState() == true) {
-            setTheme(R.style.DarkTheme)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        setTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        toolbar = findViewById(R.id.toolbar)
-
-        courseUid = intent.getStringExtra("courseUid")!!
-        coursePartUid = intent.getStringExtra("coursePartUid")!!
-        coursePartTitle = intent.getStringExtra("coursePartTitle")!!
-        countQuestions = intent.getLongExtra("countedQuestions", 0)
-        currentUserUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = coursePartTitle
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
+        setTools()
         updateQuestion()
         resetTimer()
         startTimer()
-
-        scoreBar.text = mScore.toString()
 
         buttonChoice1.setOnClickListener { buttonOnClick(buttonChoice1) }
         buttonChoice2.setOnClickListener { buttonOnClick(buttonChoice2) }
@@ -68,19 +48,38 @@ class QuizActivity : AppCompatActivity() {
         buttonChoice4.setOnClickListener { buttonOnClick(buttonChoice4) }
     }
 
+    private fun setTools() {
+        scoreBar.text = score.toString()
+        questionNum.text = countQuestions.toString()
+
+        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: "Title"
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = coursePartTitle
+    }
+
+    private fun setTheme() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+    }
+
     private fun resetTimer() {
         val initialTimeLeft = initialCountDown / 1000
 
         timeBar.text = initialTimeLeft.toString()
         countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval) {
-            override fun onFinish() {
-                Toast.makeText(baseContext, "Время вышло!", Toast.LENGTH_LONG).show()
-                updateQuestion()
-            }
-
             override fun onTick(millisUntilFinished: Long) {
                 val timeLeft = millisUntilFinished / 1000
                 timeBar.text = timeLeft.toString()
+            }
+            override fun onFinish() {
+                Toast.makeText(baseContext, R.string.timeIsUp, Toast.LENGTH_LONG).show()
+                updateQuestion()
             }
         }
         gameStarted = false
@@ -88,12 +87,12 @@ class QuizActivity : AppCompatActivity() {
 
     private fun buttonOnClick(buttonChoice: Button) {
         countDownTimer.cancel()
-        if (buttonChoice.text == mAnswer) {
+        if (buttonChoice.text == answer) {
             buttonChoice.setBackgroundResource(R.color.colorGreen)
-            Toast.makeText(this, "Верно", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.trueA, Toast.LENGTH_SHORT).show()
             updateScore()
 
-            if (mQuestionNumber <= countQuestions) {
+            if (questionNumber <= countQuestions) {
                 updateQuestion()
                 resetTimer()
                 if (!gameStarted) {
@@ -104,9 +103,9 @@ class QuizActivity : AppCompatActivity() {
             }
         } else {
             buttonChoice.setBackgroundResource(R.color.colorRed)
-            Toast.makeText(this, "Неверно", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.falseA, Toast.LENGTH_SHORT).show()
 
-            if (mQuestionNumber <= countQuestions) {
+            if (questionNumber <= countQuestions) {
                 updateQuestion()
                 resetTimer()
                 if (!gameStarted) {
@@ -119,89 +118,102 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion() {
-        val mQuestionRef = instance
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber/question")
 
-        mQuestionRef.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
+        courseUid = intent.getStringExtra("courseUid") ?: ""
+        coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
+        countQuestions = intent.getIntExtra("countedQuestions", 0)
+        currentUserUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
-            override fun onDataChange(p0: DataSnapshot) {
-                val question = p0.value.toString()
+        val questionRef = instance
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber/question")
+
+        questionRef.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(qTitle: DataSnapshot) {
+                val question = qTitle.value.toString()
                 questionQuiz.text = question
             }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
+
         })
 
-        val mChoice1Ref = instance
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber/choice1")
+        val choice1Ref = instance
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber/choice1")
 
-        mChoice1Ref.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                val choice = p0.value.toString()
+        choice1Ref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(choice1ds: DataSnapshot) {
+                val choice = choice1ds.value.toString()
                 buttonChoice1.setBackgroundResource(R.color.colorButton)
                 buttonChoice1.text = choice
             }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
         })
 
-        val mChoice2Ref = instance
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber/choice2")
+        val choice2Ref = instance
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber/choice2")
 
-        mChoice2Ref.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                val choice = p0.value.toString()
+        choice2Ref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(choice2ds: DataSnapshot) {
+                val choice = choice2ds.value.toString()
                 buttonChoice2.setBackgroundResource(R.color.colorButton)
                 buttonChoice2.text = choice
             }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
         })
 
-        val mChoice3Ref = instance
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber/choice3")
+        val choice3Ref = instance
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber/choice3")
 
-        mChoice3Ref.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                val choice = p0.value.toString()
+        choice3Ref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(choice3ds: DataSnapshot) {
+                val choice = choice3ds.value.toString()
                 buttonChoice3.setBackgroundResource(R.color.colorButton)
                 buttonChoice3.text = choice
             }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
         })
 
-        val mChoice4Ref = instance
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber/choice4")
+        val choice4Ref = instance
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber/choice4")
 
-        mChoice4Ref.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                val choice = p0.value.toString()
+        choice4Ref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(choice4ds: DataSnapshot) {
+                val choice = choice4ds.value.toString()
                 buttonChoice4.setBackgroundResource(R.color.colorButton)
                 buttonChoice4.text = choice
             }
-        })
-
-        val mAnswerRef = instance
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber/answer")
-
-        mAnswerRef.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                mAnswer = p0.value.toString()
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
             }
         })
 
-        mQuestionNumber++
+        val answerRef = instance
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber/answer")
+
+        answerRef.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(answerDs: DataSnapshot) {
+                answer = answerDs.value.toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
+        })
+
+        questionNumber++
     }
 
     private fun saveScoreToDatabase() {
         val saveScoreRef =  instance
             .getReference("/course/$courseUid/parts/$coursePartUid/score/$currentUserUid")
 
-        saveScoreRef.setValue(ScoreItem(currentUserUid, coursePartUid, mScore, coursePartTitle))
+        saveScoreRef.setValue(ScoreItem(currentUserUid, coursePartUid, score, coursePartTitle))
     }
 
     private fun finishTest() {
@@ -211,7 +223,8 @@ class QuizActivity : AppCompatActivity() {
         intent.putExtra("courseUid", courseUid)
         intent.putExtra("coursePartUid", coursePartUid)
         intent.putExtra("coursePartTitle", coursePartTitle)
-        intent.putExtra("score", mScore.toString())
+        intent.putExtra("score", score.toString())
+        intent.putExtra("numQuestions", countQuestions.toString())
         startActivity(intent)
         finish()
     }
@@ -222,7 +235,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun updateScore() {
-        mScore++
-        scoreBar.text = mScore.toString()
+        score++
+        scoreBar.text = score.toString()
     }
 }

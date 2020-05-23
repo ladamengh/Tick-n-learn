@@ -14,48 +14,55 @@ import kotlinx.android.synthetic.main.activity_create_questions.*
 
 class CreateQuestionsActivity : AppCompatActivity() {
 
-    val auth = FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
-    private var mQuestionNumber: Int = 1
+    private var questionNumber: Int = 1
     private lateinit var saveData: SaveData
+    private lateinit var courseUid: String
+    private lateinit var courseTitle: String
+    private lateinit var coursePartUid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_create_questions)
+
+        setTools()
+        updateQuestionNumber(questionNumber)
+
+        createQuestionButton.setOnClickListener {
+            createNewQuestion()
+        }
+
+        endCreatingQuestionButton.setOnClickListener {
+            createNewQuestion()
+            startActivity(Intent(this, CoursesListActivity::class.java))
+        }
+    }
+
+    private fun setTheme() {
         saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_questions)
-
-        toolbar = findViewById(R.id.toolbar)
-
-        updateQuestionNumber(mQuestionNumber)
-
-        val courseUid = intent.getStringExtra("courseUid")
-        val courseTitle = intent.getStringExtra("courseTitle")
-        val coursePartUid = intent.getStringExtra("coursePartUid")
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(courseTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        createQuestionButton.setOnClickListener {
-            createNewQuestion(courseUid!!, coursePartUid!!)
-        }
-
-        endCreatingQuestionButton.setOnClickListener {
-            createNewQuestion(courseUid!!, coursePartUid!!)
-            startActivity(Intent(this, CoursesListActivity::class.java))
-        }
     }
 
-    private fun createNewQuestion(courseUid: String, coursePartUid: String) {
+    private fun setTools() {
+        toolbar = findViewById(R.id.toolbar)
+        courseTitle = intent.getStringExtra("courseTitle") ?: ""
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = courseTitle
+    }
+
+    private fun createNewQuestion() {
+        courseUid = intent.getStringExtra("courseUid") ?: ""
+        coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
         val ref = FirebaseDatabase.getInstance()
-            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$mQuestionNumber")
+            .getReference("/course/$courseUid/parts/$coursePartUid/test/question$questionNumber")
 
         val question = createQuestion.text.toString()
         val choice1 = createChoice1.text.toString()
@@ -67,19 +74,19 @@ class CreateQuestionsActivity : AppCompatActivity() {
         if (question.isEmpty() || choice1.isEmpty() || choice2.isEmpty()
             || choice3.isEmpty() || choice4.isEmpty() || answer.isEmpty())
         {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.allFields, Toast.LENGTH_SHORT).show()
         } else {
             val questionFull = Question(question, choice1, choice2, choice3, choice4, answer)
 
             ref.setValue(questionFull)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Вопрос добавлен", Toast.LENGTH_SHORT).show()
-                    mQuestionNumber++
-                    updateQuestionNumber(mQuestionNumber)
+                    Toast.makeText(this, R.string.questionAdded, Toast.LENGTH_SHORT).show()
+                    questionNumber++
+                    updateQuestionNumber(questionNumber)
                     clearTexts()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -93,8 +100,8 @@ class CreateQuestionsActivity : AppCompatActivity() {
         createAnswer.text?.clear()
     }
 
-    private fun updateQuestionNumber(mQuestionNumber: Int) {
-        numberQBar.text = mQuestionNumber.toString()
+    private fun updateQuestionNumber(questionNumber: Int) {
+        numberQBar.text = questionNumber.toString()
     }
 }
 

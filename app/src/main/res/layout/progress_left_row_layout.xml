@@ -11,10 +11,12 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:src="@mipmap/ic_planet_foreground"
+
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,21 +24,26 @@
         android:id="@+id/partTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        tools:text="@string/title"
+        android:textColor="?attr/textColor"
+        android:textStyle="bold"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Название"
-        android:textColor="?attr/textColor"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="60dp"
         android:layout_height="60dp"
+
         android:src="@mipmap/ic_star_foreground"
+
         app:layout_constraintVertical_bias="0.8"
         app:layout_constraintHorizontal_bias="0.27"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,13 +53,16 @@
         android:id="@+id/scoreTextView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:gravity="center"
+
+        tools:text="14"
         android:textStyle="bold"
         android:textSize="12sp"
         android:textColor="?attr/textColor"
-        tools:text="14"
+
+        android:gravity="center"
         app:layout_constraintVertical_bias="0.83"
         app:layout_constraintHorizontal_bias="0.267"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

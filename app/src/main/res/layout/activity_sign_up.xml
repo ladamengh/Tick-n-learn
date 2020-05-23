@@ -12,6 +12,7 @@
         layout="@layout/toolbar_layout"/>
 
     <LinearLayout
+        android:id="@+id/layoutRegistration"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -21,79 +22,88 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/photoImageViewR"
-            app:civ_border_width="2dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
+
             android:background="@drawable/select_photo_rounded"/>
 
-        <Button
+        <TextView
             android:id="@+id/photoButtonR"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Выбрать фотографию"
+
+            android:text="@string/choosePhoto"
             android:textColor="?attr/textColor"
+            android:textStyle="bold" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/usernameEditTextR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/username"
+            android:inputType="textPersonName"
+            android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
+
+            android:paddingLeft="16dp"
+            app:met_floatingLabel="normal"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/emailEditTextR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
+
+            android:paddingLeft="16dp"
+            app:met_floatingLabel="normal"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/passwordEditTextR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="?attr/textColor"
+            android:textColorHint = "?attr/textColor"
+            android:backgroundTint="?attr/textColor"
+
+            android:layout_marginTop="8dp"
+            android:paddingLeft="16dp"
+            app:met_floatingLabel="normal"/>
+
+        <Button
+            android:id="@+id/registerButtonR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/register"
             android:textStyle="bold"
-            android:background="@android:color/transparent"/>
+            android:textColor="?attr/textColor"
+            android:textAllCaps="false"
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/usernameEditTextR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textColor="?attr/textColor"
-        android:textColorHint = "?attr/textColor"
-        android:backgroundTint="?attr/textColor"
-        android:hint="Имя пользователя"
-        android:inputType="textPersonName"
-        android:paddingLeft="16dp"
-        app:met_floatingLabel="normal"/>
+            android:background="?attr/buttonColor"
+            android:layout_marginTop="8dp"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/emailEditTextR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textColor="?attr/textColor"
-        android:textColorHint = "?attr/textColor"
-        android:backgroundTint="?attr/textColor"
-        android:hint="Электронная почта (email)"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="16dp"
-        app:met_floatingLabel="normal"/>
+        <TextView
+            android:id="@+id/alreadyHaveAccountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/passwordEditTextR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:textColor="?attr/textColor"
-        android:textColorHint = "?attr/textColor"
-        android:backgroundTint="?attr/textColor"
-        android:hint="Пароль"
-        android:inputType="textPassword"
-        android:paddingLeft="16dp"
-        app:met_floatingLabel="normal"/>
+            android:text="@string/alreadyReg"
+            android:textColor="?attr/textColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
 
-    <Button
-        android:id="@+id/registerButtonR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Зарегистрироваться"
-        android:textStyle="bold"
-        android:textColor="?attr/textColor"
-        android:background="?attr/buttonColor"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/alreadyHaveAccountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Уже зарегистрированы?"
-        android:textColor="?attr/textColor"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"/>
 
     </LinearLayout>
+
 </RelativeLayout>

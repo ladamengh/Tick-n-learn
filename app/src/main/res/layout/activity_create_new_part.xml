@@ -12,56 +12,66 @@
         layout="@layout/toolbar_layout"/>
 
     <LinearLayout
+        android:id="@+id/layoutPart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ImageView
             android:id="@+id/courseImageViewC"
             android:layout_width="150dp"
             android:layout_height="150dp"
+
             android:background="@mipmap/ic_book_foreground" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/titleEditTextP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:backgroundTint="?attr/textColor"
             android:ems="10"
-            android:hint="Название"
+            android:hint="@string/title"
             android:inputType="textPersonName"
             android:paddingLeft="16dp"
+
             android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
+            android:textColorHint="?attr/textColor"
             app:met_floatingLabel="normal" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/imagePartUrlEditTextP"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:ems="10"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
+
             android:backgroundTint="?attr/textColor"
-            android:hint="Изображение (URL)"
+            android:ems="10"
+            android:hint="@string/imageURL"
             android:paddingLeft="16dp"
+
+            android:textColor="?attr/textColor"
+            android:textColorHint="?attr/textColor"
             app:met_floatingLabel="normal" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/textEditTextP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="200dp"
-            android:ems="10"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:hint="Обучающий текстовый материал"
+
+            android:ems="10"
+            android:hint="@string/infoText"
+            android:maxHeight="200dp"
             android:paddingLeft="16dp"
+
+            android:textColor="?attr/textColor"
+            android:textColorHint="?attr/textColor"
             app:met_floatingLabel="normal" />
 
     </LinearLayout>
@@ -70,13 +80,19 @@
         android:id="@+id/createPartButtonP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_margin="30dp"
         android:background="?attr/buttonColor"
-        android:text="Перейти к созданию тестов по теме"
+        android:text="@string/goToCreatingTests"
         android:textColor="?attr/textColor"
+        android:textAllCaps="false"
+
         android:textStyle="bold"
+        app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

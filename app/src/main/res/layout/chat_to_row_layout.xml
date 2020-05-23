@@ -11,9 +11,11 @@
         android:id="@+id/userToImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
+
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:background="@android:drawable/btn_star_big_on"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,15 +23,18 @@
         android:id="@+id/messageToUserTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/backgroundMessageColor"
+
+        android:text="@string/testMessage"
         android:textColor="?attr/textColor"
+        android:textSize="14sp"
+
+        android:background="@drawable/button"
+        android:backgroundTint="?attr/backgroundMessageColor"
         android:maxWidth="240dp"
         android:padding="8dp"
-        android:textSize="14sp"
-        android:layout_marginEnd="8dp"
 
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/userToImageView"
-        app:layout_constraintTop_toTopOf="@+id/userToImageView"
-        android:text="Text message cool message awesome message testing" />
+        app:layout_constraintTop_toTopOf="@+id/userToImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

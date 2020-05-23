@@ -12,8 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".courses.ProgressActivity"/>
+        android:theme="@style/AppTheme"
+        android:name=".models.TickNLearn">
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             android:name=".auth.SignUpActivity"
             android:parentActivityName=".auth.MainActivity" />
         <activity
-            android:name=".messages.NewMessageActivity"
+            android:name=".messages.NewDialogActivity"
             android:parentActivityName=".messages.LatestMessagesActivity" />
         <activity
             android:name=".messages.ChatLogActivity"
@@ -47,7 +47,8 @@
             android:name=".courses.QuizActivity"
             android:parentActivityName=".courses.InfoActivity" />
         <activity
-            android:name=".courses.FinishTestActivity"/>
+            android:name=".courses.FinishTestActivity"
+            android:parentActivityName=".courses.InfoActivity"/>
         <activity
             android:name=".courses.CreateNewCourseActivity"
             android:parentActivityName=".courses.CoursesListActivity" />
@@ -57,6 +58,8 @@
         <activity
             android:name=".courses.CreateQuestionsActivity"
             android:parentActivityName=".courses.CreateNewPartActivity" />
+        <activity android:name=".courses.ProgressActivity"
+            android:parentActivityName=".courses.CoursePartActivity"/>
     </application>
 
 </manifest>

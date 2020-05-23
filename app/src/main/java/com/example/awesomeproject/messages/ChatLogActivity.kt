@@ -26,52 +26,51 @@ class ChatLogActivity : AppCompatActivity() {
     private var toUser: User? = null
     private lateinit var saveData: SaveData
 
-    val instance = FirebaseDatabase.getInstance()
-    val adapter = GroupAdapter<GroupieViewHolder>()
+    private val instance = FirebaseDatabase.getInstance()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        saveData = SaveData(this)
-        if (saveData.loadDarkModeState() == true) {
-            setTheme(R.style.DarkTheme)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        setTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        toolbar = findViewById(R.id.toolbar)
-
-        chatLogRecyclerView.adapter = adapter
-
-        toUser = intent.getParcelableExtra(NewMessageActivity.USER_KEY)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = toUser?.username
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         listenForMessages()
+        setTools()
 
         sendButtonChatLog.setOnClickListener {
             sendMessage()
         }
     }
 
+    private fun setTheme() {
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+    }
+
+    private fun setTools() {
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = toUser?.username
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     private fun listenForMessages() {
+        toUser = intent.getParcelableExtra(NewDialogActivity.USER_KEY)
         val fromId = FirebaseAuth.getInstance().uid
         val toId = toUser?.uid
         val ref = instance.getReference("/user-messages/$fromId/$toId")
 
+        chatLogRecyclerView.adapter = adapter
+
         ref.addChildEventListener(object: ChildEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
-
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) { }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) { }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val chatMessage = p0.getValue(ChatMessage::class.java)
+            override fun onChildAdded(messagesSnapshot: DataSnapshot, p1: String?) {
+                val chatMessage = messagesSnapshot.getValue(ChatMessage::class.java)
 
                 if (chatMessage != null) {
                     if (chatMessage.fromID == FirebaseAuth.getInstance().uid) {
@@ -80,16 +79,21 @@ class ChatLogActivity : AppCompatActivity() {
                         adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     }
                 }
-
                 chatLogRecyclerView.scrollToPosition(adapter.itemCount - 1)
             }
 
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) { }
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) { }
             override fun onChildRemoved(p0: DataSnapshot) { }
+
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
         })
     }
 
     private fun sendMessage() {
-        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val user = intent.getParcelableExtra<User>(NewDialogActivity.USER_KEY)
         val text = messageEditTextChatLog.text.toString()
         val fromId = FirebaseAuth.getInstance().uid
         val toId = user?.uid
@@ -108,7 +112,7 @@ class ChatLogActivity : AppCompatActivity() {
                 chatLogRecyclerView.scrollToPosition(adapter.itemCount - 1)
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Что-то пошло не так", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.errorS, Toast.LENGTH_SHORT).show()
             }
         toReference.setValue(chatMessage)
         latestMessageReference.setValue(chatMessage)

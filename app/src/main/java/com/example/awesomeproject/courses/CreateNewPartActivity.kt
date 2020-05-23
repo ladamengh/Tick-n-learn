@@ -20,33 +20,39 @@ class CreateNewPartActivity : AppCompatActivity() {
     private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_create_new_part)
+
+        setTools()
+
+        createPartButtonP.setOnClickListener {
+            createNewPart()
+            startActivity(Intent(this, CreateQuestionsActivity::class.java))
+        }
+    }
+
+    private fun setTheme() {
         saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
+    }
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_new_part)
-
+    private fun setTools() {
         toolbar = findViewById(R.id.toolbar)
 
-        val courseUid = intent.getStringExtra("courseUid")
         val courseTitle = intent.getStringExtra("courseTitle")
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(courseTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        createPartButtonP.setOnClickListener {
-            createNewPart(courseUid!!)
-            startActivity(Intent(this, CreateQuestionsActivity::class.java))
-        }
+        supportActionBar?.title = courseTitle
     }
 
-    private fun createNewPart(courseUid: String) {
+    private fun createNewPart() {
+        val courseUid = intent.getStringExtra("courseUid") ?: ""
         val uid = UUID.randomUUID().toString()
         val ref = FirebaseDatabase.getInstance().getReference("/course/$courseUid/parts/$uid")
 
@@ -56,7 +62,7 @@ class CreateNewPartActivity : AppCompatActivity() {
 
         if (titlePart.isEmpty() || textPart.isEmpty())
         {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.allFields, Toast.LENGTH_SHORT).show()
         } else {
         val coursePart = PartOfCourse(uid, imagePartUrl, titlePart, textPart)
 
@@ -70,7 +76,7 @@ class CreateNewPartActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
             }
         }
     }

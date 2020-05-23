@@ -17,28 +17,41 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*
+import java.util.*
 
-class NewMessageActivity : AppCompatActivity() {
+class NewDialogActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var saveData: SaveData
 
     companion object {
-        val USER_KEY = "USER_KEY"
+        const val USER_KEY = "USER_KEY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_new_message)
+
+        fetchUsers()
+        setTools()
+
+        searchText.doOnTextChanged { _, _, _, _ ->
+            searchUser(searchText.text.toString().trim())
+        }
+    }
+
+    private fun setTheme() {
         saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
+    }
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_message)
-
+    private fun setTools() {
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         toolbar = findViewById(R.id.toolbar)
@@ -46,27 +59,19 @@ class NewMessageActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.newMessageToolbarTitle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        fetchUsers()
-
-        searchText.doOnTextChanged { text, start, count, after ->
-
-            val searchText = searchText.text.toString().trim()
-
-            searchUser(searchText)
-        }
     }
+
 
     private fun fetchUsers() {
 
         val ref = FirebaseDatabase.getInstance().getReference("/users")
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
+            override fun onDataChange(userSnapshot: DataSnapshot) {
 
                 val adapter = GroupAdapter<GroupieViewHolder>()
 
-                p0.children.forEach {
+                userSnapshot.children.forEach {
                     val user = it.getValue(User::class.java)
                     adapter.add(UserItem(user!!))
                 }
@@ -79,28 +84,30 @@ class NewMessageActivity : AppCompatActivity() {
 
                     finish()
                 }
-
                 recyclerViewNewMessage.adapter = adapter
             }
 
-            override fun onCancelled(p0: DatabaseError) {
-
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
             }
         })
     }
 
     private fun searchUser(searchText: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
+
         if (searchText.isEmpty()) {
             fetchUsers()
         } else {
             val ref = FirebaseDatabase.getInstance().getReference("/users")
-            val searchQuery = ref.orderByChild("username").startAt(searchText).endAt("$searchText\uf8ff")
+            val searchQuery = ref
+                .orderByChild("username")
+                .startAt(searchText.toUpperCase(Locale.ROOT))
+                .endAt("${searchText.toLowerCase(Locale.ROOT)}\uf8ff")
 
             searchQuery.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(p0: DataSnapshot) {
-
-                    p0.children.forEach {
+                override fun onDataChange(userSearchSnapshot: DataSnapshot) {
+                    userSearchSnapshot.children.forEach {
                         val user = it.getValue(User::class.java)
                         adapter.add(UserItem(user!!))
                     }
@@ -113,12 +120,10 @@ class NewMessageActivity : AppCompatActivity() {
 
                         finish()
                     }
-
                     recyclerViewNewMessage.adapter = adapter
                 }
-
-                override fun onCancelled(p0: DatabaseError) {
-
+                override fun onCancelled(error: DatabaseError) {
+                    throw error.toException()
                 }
             })
         }

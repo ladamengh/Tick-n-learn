@@ -12,6 +12,7 @@
         layout="@layout/toolbar_layout"/>
 
     <LinearLayout
+        android:id="@+id/layoutLoginForm"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -23,12 +24,13 @@
             android:id="@+id/emailEditTextL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:hint="Электронная почта (email)"
-            android:inputType="textEmailAddress"
+
             android:paddingLeft="16dp"
             app:met_floatingLabel="normal"/>
 
@@ -36,13 +38,14 @@
             android:id="@+id/passwordEditTextL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
+
+            android:hint="@string/password"
+            android:inputType="textPassword"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:hint="Пароль"
-            android:inputType="textPassword"
+
+            android:layout_marginTop="8dp"
             android:paddingLeft="16dp"
             app:met_floatingLabel="normal"/>
 
@@ -50,21 +53,45 @@
             android:id="@+id/loginButtonL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Войти"
+
+            android:text="@string/login"
             android:textColor="?attr/textColor"
             android:textStyle="bold"
+            android:textAllCaps="false"
+
             android:background="?attr/buttonColor"
             android:layout_marginTop="8dp"/>
 
-        <TextView
-            android:id="@+id/doNotHaveAccountTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layoutLoginText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Нет аккаунта?"
-            android:textColor="?attr/textColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <TextView
+                android:id="@+id/doNotHaveAccountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/noAccount"
+                android:textColor="?attr/textColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+
+                android:layout_margin="16dp" />
+
+            <TextView
+                android:id="@+id/forgotPasswordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+                android:text="@string/forgotPassword"
+                android:textColor="?attr/textColor"
+
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

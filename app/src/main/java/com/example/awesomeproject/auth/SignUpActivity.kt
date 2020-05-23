@@ -24,25 +24,14 @@ class SignUpActivity : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
     var selectedPhotoUri: Uri? = null
-    private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        saveData = SaveData(this)
-        if (saveData.loadDarkModeState() == true) {
-            setTheme(R.style.DarkTheme)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        setTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        toolbar = findViewById(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.signUpToolbarTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setTools()
 
         registerButtonR.setOnClickListener {
             signUpUser()
@@ -59,6 +48,22 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    private fun setTheme() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+    }
+
+    private fun setTools() {
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setTitle(R.string.registration)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -73,21 +78,18 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpUser() {
-
-        val email = emailEditTextR!!.text.toString()
-        val password = passwordEditTextR!!.text.toString()
+        val email = emailEditTextR.text.toString()
+        val password = passwordEditTextR.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.allFields, Toast.LENGTH_SHORT).show()
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         uploadImageToFirebaseStorage()
                     } else {
-                        Log.w("TAG", "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -101,14 +103,16 @@ class SignUpActivity : AppCompatActivity() {
 
         ref.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
-                Log.d("SignUpActivity", "Successfully uploaded an image: ${it.metadata?.path}")
-
                 ref.downloadUrl.addOnSuccessListener {
                     saveUserToFirebaseDatabase(it.toString())
                 }
-                    .addOnFailureListener { }
+                    .addOnFailureListener {
+                        Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
+                    }
             }
-            .addOnFailureListener { }
+            .addOnFailureListener {
+                Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
@@ -119,14 +123,12 @@ class SignUpActivity : AppCompatActivity() {
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Log.d("SignUpActivity", "Saved the user to Database")
-
                 val intent = Intent(this, UserProfileActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
             .addOnFailureListener {
-
+                Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
             }
     }
 }

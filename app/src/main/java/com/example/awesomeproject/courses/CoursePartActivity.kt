@@ -9,8 +9,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.awesomeproject.R
 import com.example.awesomeproject.SaveData
-import com.example.awesomeproject.models.Course
-import com.example.awesomeproject.models.CourseItem
 import com.example.awesomeproject.models.PartOfCourse
 import com.example.awesomeproject.models.PartOfCourseItem
 import com.google.firebase.database.DataSnapshot
@@ -28,46 +26,51 @@ class CoursePartActivity : AppCompatActivity() {
     private lateinit var coursePartTitle: String
     private lateinit var courseUid: String
     private lateinit var courseTitle: String
-    private lateinit var saveData: SaveData
+    private var instance = FirebaseDatabase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
-        saveData = SaveData(this)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_course_part)
+
+        setTools()
+        fetchParts()
+    }
+
+    private fun setTools() {
+        courseTitle = intent.getStringExtra("courseTitle") ?: "courseTitle"
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = courseTitle
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        recyclerViewNewCoursePart.addItemDecoration(
+            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        )
+    }
+
+    private fun setTheme() {
+        val saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_course_part)
-
-        toolbar = findViewById(R.id.toolbar)
-
-        recyclerViewNewCoursePart.addItemDecoration(
-            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        )
-
-        courseUid = intent.getStringExtra("courseUid")!!
-        courseTitle = intent.getStringExtra("courseTitle")!!
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(courseTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        fetchParts(courseUid)
     }
 
-    private fun fetchParts(courseUid: String) {
+    private fun fetchParts() {
+        courseUid = intent.getStringExtra("courseUid") ?: "courseUid"
 
-        val ref = FirebaseDatabase.getInstance().getReference("/course/$courseUid/parts/")
+        val ref = instance.getReference("/course/$courseUid/parts/")
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
+            override fun onDataChange(partSnapshot: DataSnapshot) {
 
                 val adapter = GroupAdapter<GroupieViewHolder>()
 
-                p0.children.forEach {
+                partSnapshot.children.forEach {
                     val coursePart = it.getValue(PartOfCourse::class.java)
                     adapter.add(PartOfCourseItem(coursePart!!))
                 }
@@ -89,8 +92,8 @@ class CoursePartActivity : AppCompatActivity() {
                 recyclerViewNewCoursePart.adapter = adapter
             }
 
-            override fun onCancelled(p0: DatabaseError) {
-
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
             }
         })
     }

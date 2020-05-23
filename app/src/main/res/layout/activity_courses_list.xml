@@ -11,16 +11,17 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/searchText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Поиск"
+
+        android:hint="@string/search"
         android:paddingLeft="16dp"
         android:textColor="?attr/textColor"
         android:textColorHint = "?attr/textColor"
         android:backgroundTint="?attr/textColor"
-        android:focusedByDefault="false"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -29,7 +30,9 @@
         android:id="@+id/yourCoursesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +42,10 @@
         android:id="@+id/createNewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
+
+        android:text="@string/plus"
         android:visibility="gone"
+
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -48,9 +53,11 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimaryDark"
+
+        android:background="?attr/toolbarColor"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

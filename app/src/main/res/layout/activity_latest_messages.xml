@@ -15,6 +15,7 @@
         android:id="@+id/latestMessagesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,12 +26,15 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimaryDark"
+
+        android:background="?attr/toolbarColor"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:menu="@menu/menu_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

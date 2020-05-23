@@ -14,64 +14,78 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_below="@id/toolbar"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ImageView
             android:id="@+id/courseImageViewC"
             android:layout_width="150dp"
             android:layout_height="150dp"
+
             android:background="@mipmap/ic_book_foreground" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/titleEditTextC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:hint="@string/title"
             android:ems="10"
-            android:hint="Название"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
+            android:textColor="?attr/textColor"
+            android:textColorHint="?attr/textColor"
+
             android:paddingLeft="16dp"
             app:met_floatingLabel="normal"
-            android:textColor="?attr/textColor"/>
+            android:backgroundTint="?attr/textColor"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/imageUrlEditTextC"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+
+            android:hint="@string/imageURL"
             android:ems="10"
             android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:hint="Изображение для курса (URL)"
+            android:textColorHint="?attr/textColor"
+
             android:paddingLeft="16dp"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            android:backgroundTint="?attr/textColor"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/descriptionEditTextC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+
+            android:hint="@string/smallDescription"
             android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:hint="Краткое описание"
+            android:textColorHint="?attr/textColor"
+            android:ems="10"
+
             android:paddingLeft="16dp"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            android:backgroundTint="?attr/textColor"/>
 
         <Button
             android:id="@+id/createCourseButtonC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="?attr/buttonColor"
-            android:text="Перейти к созданию тем"
+
+            android:text="@string/goToCreatingTheme"
             android:textColor="?attr/textColor"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAllCaps="false"
+
+            android:layout_margin="30dp"
+            android:background="?attr/buttonColor"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

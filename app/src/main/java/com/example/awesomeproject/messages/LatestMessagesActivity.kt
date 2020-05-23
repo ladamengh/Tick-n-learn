@@ -11,7 +11,7 @@ import com.example.awesomeproject.R
 import com.example.awesomeproject.SaveData
 import com.example.awesomeproject.UserProfileActivity
 import com.example.awesomeproject.courses.CoursesListActivity
-import com.example.awesomeproject.messages.NewMessageActivity.Companion.USER_KEY
+import com.example.awesomeproject.messages.NewDialogActivity.Companion.USER_KEY
 import com.example.awesomeproject.models.ChatMessage
 import com.example.awesomeproject.models.LatestMessageRow
 import com.google.firebase.auth.FirebaseAuth
@@ -26,26 +26,41 @@ class LatestMessagesActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var saveData: SaveData
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
-
-    val latestMessagesMap = HashMap<String, ChatMessage>()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+    private val latestMessagesMap = HashMap<String, ChatMessage>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_latest_messages)
+
+        listenForLatestMessages()
+        setTools()
+        setNavigation()
+    }
+
+    private fun setTheme() {
         saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
+    }
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_latest_messages)
+    private fun setTools() {
+        toolbar = findViewById(R.id.toolbar)
 
-        latestMessagesRecyclerView.adapter = adapter
+        setSupportActionBar(toolbar)
+        supportActionBar?.setTitle(R.string.latestMessagesToolbarTitle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         latestMessagesRecyclerView.addItemDecoration(
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+    }
 
+    private fun setNavigation() {
         bottomNavigation.selectedItemId = R.id.dialogs
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -56,11 +71,42 @@ class LatestMessagesActivity : AppCompatActivity() {
                     startActivity(Intent(this, CoursesListActivity::class.java))
                 }
                 R.id.dialogs -> {
-                    true
+                    startActivity(Intent(this, LatestMessagesActivity::class.java))
                 }
             }
             true
         }
+    }
+
+    private fun listenForLatestMessages() {
+        val fromId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
+
+        latestMessagesRecyclerView.adapter = adapter
+
+        ref.addChildEventListener(object: ChildEventListener {
+
+            override fun onChildAdded(onAddSnapshot: DataSnapshot, p1: String?) {
+                val chatMessage = onAddSnapshot.getValue(ChatMessage::class.java) ?: return
+
+                latestMessagesMap[onAddSnapshot.key!!] = chatMessage
+                refreshRecyclerViewMessages()
+            }
+
+            override fun onChildChanged(onChangeSnapshot: DataSnapshot, p1: String?) {
+                val chatMessage = onChangeSnapshot.getValue(ChatMessage::class.java) ?: return
+
+                latestMessagesMap[onChangeSnapshot.key!!] = chatMessage
+                refreshRecyclerViewMessages()
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) { }
+            override fun onChildRemoved(p0: DataSnapshot) { }
+
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
+        })
 
         adapter.setOnItemClickListener { item, view ->
             val intent = Intent(this, ChatLogActivity::class.java)
@@ -68,40 +114,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             intent.putExtra(USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
-
-        listenForLatestMessages()
-
-        toolbar = findViewById(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.latestMessagesToolbarTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-    }
-
-    private fun listenForLatestMessages() {
-        val fromId = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
-
-        ref.addChildEventListener(object: ChildEventListener {
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
-
-                latestMessagesMap[p0.key!!] = chatMessage
-                refreshRecyclerViewMessages()
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
-
-                latestMessagesMap[p0.key!!] = chatMessage
-                refreshRecyclerViewMessages()
-            }
-
-            override fun onCancelled(p0: DatabaseError) { }
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) { }
-            override fun onChildRemoved(p0: DataSnapshot) { }
-        })
     }
 
     private fun refreshRecyclerViewMessages() {
@@ -113,7 +125,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menuNewMessage -> startActivity(Intent(this, NewMessageActivity::class.java))
+            R.id.menuNewMessage -> startActivity(Intent(this, NewDialogActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

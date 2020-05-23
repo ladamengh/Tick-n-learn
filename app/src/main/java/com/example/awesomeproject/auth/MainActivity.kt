@@ -9,26 +9,27 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var saveData: SaveData
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        saveData = SaveData(this)
-        if (saveData.loadDarkModeState() == true) {
-            setTheme(R.style.DarkTheme)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        setTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button.setOnClickListener {
+        regButton.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
-        button2.setOnClickListener {
+        logButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
+    private fun setTheme() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
         }
     }
 }

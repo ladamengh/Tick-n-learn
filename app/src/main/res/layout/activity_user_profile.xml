@@ -12,13 +12,15 @@
         layout="@layout/toolbar_layout"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayoutUser"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         android:layout_below="@id/toolbar"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,33 +30,36 @@
             android:id="@+id/photoImageViewP"
             android:layout_width="150dp"
             android:layout_height="150dp"
+
             android:layout_margin="20dp"
-            android:background="@drawable/select_photo_rounded"
-            app:civ_border_width="0dp" />
+            android:background="@drawable/select_photo_rounded" />
 
         <TextView
             android:id="@+id/usernameTextViewP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+
+            android:hint="@string/username"
             android:ems="10"
-            android:paddingStart="16dp"
             android:textColor="?attr/textColor"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Имя пользователя" />
+
+            android:layout_margin="10dp"
+            android:paddingStart="16dp" />
 
         <TextView
             android:id="@+id/uidTextViewP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+
+            android:hint="@string/uid"
             android:ems="10"
-            android:paddingLeft="16dp"
             android:textColor="?attr/textColor"
             android:textSize="14sp"
-            tools:text="Идентификатор" />
 
+            android:paddingLeft="16dp"
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 
@@ -62,9 +67,11 @@
         android:id="@+id/switchDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Тёмный режим"
-        android:padding="40dp"
+
+        android:text="@string/darkMode"
         android:textColor="?attr/textColor"
+
+        android:padding="40dp"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -73,10 +80,12 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorPrimaryDark"
+
+        android:background="?attr/toolbarColor"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation" />

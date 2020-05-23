@@ -20,33 +20,16 @@ class InfoActivity : AppCompatActivity() {
     private lateinit var courseUid: String
     private lateinit var coursePartUid: String
     private lateinit var coursePartTitle: String
-    private var countQuestions: Long = 0
-    private lateinit var saveData: SaveData
+    private var countQuestions: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        saveData = SaveData(this)
-        if (saveData.loadDarkModeState() == true) {
-            setTheme(R.style.DarkTheme)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        setTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
 
-        toolbar = findViewById(R.id.toolbar)
-
-        courseUid = intent.getStringExtra("courseUid")!!
-        coursePartUid = intent.getStringExtra("coursePartUid")!!
-        coursePartTitle = intent.getStringExtra("coursePartTitle")!!
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = coursePartTitle
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        setTools()
         setInfo()
-
         countQuestions()
 
         goToQuizButton.setOnClickListener {
@@ -54,17 +37,39 @@ class InfoActivity : AppCompatActivity() {
         }
     }
 
+    private fun setTheme() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+    }
+
+    private fun setTools() {
+        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: "Title"
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = coursePartTitle
+    }
+
     private fun setInfo() {
+        courseUid = intent.getStringExtra("courseUid") ?: "courseUid"
+        coursePartUid = intent.getStringExtra("coursePartUid") ?: "coursePartUid"
+
         val ref = FirebaseDatabase.getInstance()
             .getReference("/course/$courseUid/parts/$coursePartUid")
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                val coursePart = p0.getValue(PartOfCourse::class.java)
+            override fun onDataChange(partInfoSnapshot: DataSnapshot) {
+                val coursePart = partInfoSnapshot.getValue(PartOfCourse::class.java)
                 infoTextView.text = coursePart?.info ?: ""
                 Picasso.get().load(coursePart?.imageUrl).into(infoImageView)
                 }
-            override fun onCancelled(p0: DatabaseError) { }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
         })
     }
 
@@ -73,17 +78,26 @@ class InfoActivity : AppCompatActivity() {
             .getReference("/course/$courseUid/parts/$coursePartUid/test/")
 
         countQuestionRef.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
 
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-                    p0.children.forEach {
+            override fun onDataChange(questionsSnapshot: DataSnapshot) {
+                if (questionsSnapshot.exists()) {
+                    questionsSnapshot.children.forEach { _ ->
                         countQuestions++
                     }
+                }
+                if (countQuestions > 0) {
+                    goToQuizButton.isEnabled = true
+                } else {
+                    goToQuizButton.isEnabled = false
+                    goToQuizButton.setText(R.string.noTest)
                 }
             }
         })
     }
+
 
     private fun goToQuiz() {
         val intent = Intent(Intent(this, QuizActivity::class.java))

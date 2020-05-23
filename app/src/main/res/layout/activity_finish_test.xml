@@ -16,48 +16,88 @@
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
+
         android:src="@mipmap/ic_cup_foreground"
+
+        app:layout_constraintVertical_bias="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ваш результат"
+
+        android:text="@string/yourResult"
         android:textSize="30sp"
         android:textColor="?attr/textColor"
+
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/resultBar"
+    <LinearLayout
+        android:id="@+id/linearLayoutScoreResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="36sp"
-        android:textColor="?attr/textColor"
+
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultTextView"
-        app:layout_constraintVertical_bias="0.2"
-        tools:text="10" />
+        app:layout_constraintTop_toBottomOf="@+id/resultTextView">
+
+
+        <TextView
+            android:id="@+id/scoreBar"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+
+            android:text="@string/_0"
+            android:textAlignment="center"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+
+            android:text="@string/outOf"
+            android:textAlignment="center"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/questionNum"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+
+            android:text="@string/_0"
+            android:textAlignment="center"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/goBackTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Вернуться к теме"
+
+        android:text="@string/goBackToTheme"
         android:textColor="?attr/textColor"
+
         app:layout_constraintVertical_bias="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultBar" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutScoreResult" />
 </androidx.constraintlayout.widget.ConstraintLayout>

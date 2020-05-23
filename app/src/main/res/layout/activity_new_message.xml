@@ -5,22 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
-    tools:context="com.example.awesomeproject.messages.NewMessageActivity">
+    tools:context="com.example.awesomeproject.messages.NewDialogActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/searchText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Поиск"
+
+        android:hint="@string/search"
         android:paddingLeft="16dp"
         android:textColor="?attr/textColor"
         android:textColorHint = "?attr/textColor"
         android:backgroundTint="?attr/textColor"
         android:focusedByDefault="false"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -29,7 +31,9 @@
         android:id="@+id/recyclerViewNewMessage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

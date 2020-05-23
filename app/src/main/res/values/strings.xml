@@ -1,12 +1,69 @@
 <resources>
     <string name="app_name">Tick-n-Learn</string>
-    <string name="loginToolbarTitle">Авторизация</string>
-    <string name="signUpToolbarTitle">Регистрация</string>
+
+    <string name="registration">Регистрация</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="auth">Авторизация</string>
+    <string name="login">Войти</string>
+    <string name="offline">Оффлайн-режим</string>
+
+    <string name="choosePhoto">Выбрать фотографию</string>
+    <string name="username">Имя пользователя</string>
+    <string name="email">Электронная почта (email)</string>
+    <string name="password">Пароль</string>
+
+    <string name="alreadyReg">Уже зарегистрированы?</string>
+    <string name="noAccount">Нет аккаунта?</string>
+    <string name="forgotPassword">Забыли пароль?</string>
+    <string name="emptyEmail">Чтобы восстановить пароль, введите адрес электронной почты в поле сверху</string>
+    <string name="allFields">Все поля обязательны</string>
+    <string name="resetEmail">Восстановление пароля отправлено на почту</string>
+    <string name="resetError">Ошибка! Проверьте введённые данные</string>
+    <string name="authFailed">Ошибка авторизации</string>
+    <string name="errorS">Что-то пошло не так</string>
+
     <string name="latestMessagesToolbarTitle">Диалоги</string>
     <string name="newMessageToolbarTitle">Новый диалог</string>
     <string name="createCourseToolbarTitle">Создание нового курса</string>
     <string name="profileToolbarTitle">Ваш профиль</string>
     <string name="coursesToolbarTitle">Доступные курсы</string>
     <string name="addCourseToolbarTitle">Выбрать новый курс</string>
+    <string name="progressToolbarTitle">Прогресс</string>
+
+    <string name="search">Поиск</string>
     <string name="score">Количество очков: </string>
+    <string name="noTest">Вопросов к этой теме, к сожалению, нет </string>
+    <string name="trueA">Верно</string>
+    <string name="falseA">Неверно</string>
+    <string name="timeIsUp">Время вышло!</string>
+    <string name="noResults">Вы ещё не проходили тесты из данной темы</string>
+    <string name="questionAdded">Вопрос добавлен</string>
+
+    <string name="send">Отправить</string>
+    <string name="enterMessage">Введите сообщение</string>
+    <string name="numberCreateQuestion">Номер создаваемого вопроса</string>
+    <string name="enterQuestion">Введите вопрос</string>
+    <string name="firstChoice">Первый вариант</string>
+    <string name="secondChoice">Второй вариант</string>
+    <string name="thirdChoice">Третий вариант</string>
+    <string name="fourthChoice">Четвёртый вариант</string>
+    <string name="answer">Правильный ответ</string>
+    <string name="saveQuestion">Добавить в тест</string>
+    <string name="endCreating">Завершить создание теста</string>
+    <string name="yourResult">Ваш результат</string>
+    <string name="_0">0</string>
+    <string name="outOf">из</string>
+    <string name="goBackToTheme">Вернуться к теме</string>
+    <string name="title">Название</string>
+    <string name="imageURL">Изображение (URL)</string>
+    <string name="smallDescription">Краткое описание</string>
+    <string name="goToCreatingTheme">Перейти к созданию тем</string>
+    <string name="infoText">Обучающий текстовый материал</string>
+    <string name="goToCreatingTests">Перейти к созданию тестов по теме</string>
+    <string name="goToTest">Пройти тест</string>
+    <string name="testMessage">Text message cool message awesome message testing</string>
+    <string name="plus">+</string>
+    <string name="uid">Идентификатор</string>
+    <string name="darkMode">Тёмный режим</string>
+
 </resources>

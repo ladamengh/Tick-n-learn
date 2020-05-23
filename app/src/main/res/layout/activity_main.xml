@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="?attr/backgroundColor"
 tools:context=".auth.MainActivity">
 
-
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="16dp">
-
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
+        android:id="@+id/layoutRegister"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/buttonColor"
-        android:layout_marginTop="250dp"
-        android:textColor="?attr/textColor"
-        android:text="Регистрация" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/buttonColor"
-        android:textColor="?attr/textColor"
-        android:layout_marginTop="30dp"
-        android:text="Авторизация" />
+        <Button
+            android:id="@+id/regButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-</LinearLayout>
+            android:text="@string/registration"
+            android:textColor="?attr/textColor"
+            android:textAllCaps="false"
+
+            android:background="?attr/buttonColor"
+            android:layout_marginTop="250dp" />
+
+        <Button
+            android:id="@+id/logButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/auth"
+            android:textColor="?attr/textColor"
+            android:textAllCaps="false"
+
+            android:background="?attr/buttonColor"
+            android:layout_marginTop="30dp" />
+
+    </LinearLayout>
 </RelativeLayout>

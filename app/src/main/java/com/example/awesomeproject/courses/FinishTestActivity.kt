@@ -14,39 +14,50 @@ class FinishTestActivity : AppCompatActivity() {
     private lateinit var courseUid: String
     private lateinit var coursePartUid: String
     private lateinit var coursePartTitle: String
+    private lateinit var score: String
+    private lateinit var numQuestions: String
     private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
 
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_finish_test)
+
+        setTools()
+    }
+
+    private fun setTheme() {
         saveData = SaveData(this)
         if (saveData.loadDarkModeState() == true) {
             setTheme(R.style.DarkTheme)
         } else {
             setTheme(R.style.AppTheme)
         }
+    }
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finish_test)
-
+    private fun setTools() {
         toolbar = findViewById(R.id.toolbar)
 
-        val score = intent.getStringExtra("score")
-        courseUid = intent.getStringExtra("courseUid")!!
-        coursePartUid = intent.getStringExtra("coursePartUid")!!
-        coursePartTitle = intent.getStringExtra("coursePartTitle")!!
+        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: ""
+        score = intent.getStringExtra("score") ?: ""
+        numQuestions = intent.getStringExtra("numQuestions") ?: ""
+        courseUid = intent.getStringExtra("courseUid") ?: ""
+        coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = coursePartTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        resultBar.text = score!!
+        scoreBar.text = score
+        questionNum.text = numQuestions
 
-        /*goBackTextView.setOnClickListener {
+        goBackTextView.setOnClickListener {
             val intent = Intent(Intent(this, CoursePartActivity::class.java))
             intent.putExtra("courseUid", courseUid)
             intent.putExtra("coursePartUid", coursePartUid)
             intent.putExtra("coursePartTitle", coursePartTitle)
             startActivity(intent)
-        }*/
+        }
     }
 }

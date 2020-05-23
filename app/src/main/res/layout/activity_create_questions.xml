@@ -16,18 +16,21 @@
         android:id="@+id/questionNumLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_margin="10dp"
         android:orientation="horizontal"
         android:gravity="center"
+
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
             android:id="@+id/numberOfQuestionCreating"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Номер создаваемого вопроса"
+
+            android:text="@string/numberCreateQuestion"
             android:textAlignment="center"
             android:textColor="?attr/textColor"
             android:textSize="16sp" />
@@ -36,7 +39,10 @@
             android:id="@+id/numberQBar"
             android:layout_width="50dp"
             android:layout_height="40dp"
+
+            tools:text = "1"
             android:textAlignment="center"
+            android:gravity="center"
             android:textColor="?attr/textColor"
             android:textSize="16sp" />
 
@@ -46,8 +52,10 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_margin="20dp"
         android:orientation="vertical"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,64 +65,71 @@
             android:id="@+id/createQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:hint="@string/enterQuestion"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
             android:textAlignment="center"
-            android:textSize="20sp"
-            android:hint="Введите вопрос" />
+            android:textSize="20sp" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/createChoice1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:hint="@string/firstChoice"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:textSize="16sp"
-            android:hint="Первый вариант" />
+            android:textSize="16sp" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/createChoice2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:hint="@string/secondChoice"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:textSize="16sp"
-            android:hint="Второй вариант" />
+            android:textSize="16sp" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/createChoice3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:hint="@string/thirdChoice"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:textSize="16sp"
-            android:hint="Третий вариант" />
+            android:textSize="16sp" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/createChoice4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:hint="@string/fourthChoice"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
-            android:textSize="16sp"
-            android:hint="Четвёртый вариант" />
+            android:textSize="16sp" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/createAnswer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_margin="15dp"
+
+            android:hint="@string/answer"
             android:textColor="?attr/textColor"
             android:textColorHint = "?attr/textColor"
             android:backgroundTint="?attr/textColor"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:hint="Правильный ответ" />
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -122,22 +137,32 @@
         android:id="@+id/createQuestionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_margin="30dp"
         android:background="?attr/buttonColor"
-        android:text="Сохранить вопрос в тему"
+
+        android:text="@string/saveQuestion"
         android:textColor="?attr/textColor"
         android:textStyle="bold"
+        android:textAllCaps="false"
+
         app:layout_constraintBottom_toTopOf="@+id/endCreatingQuestionButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/endCreatingQuestionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/buttonColor"
-        android:text="Завершить создание теста"
+
+        android:background="@android:color/transparent"
+
+        android:text="@string/endCreating"
         android:textColor="?attr/textColor"
         android:textStyle="bold"
+        android:textAllCaps="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

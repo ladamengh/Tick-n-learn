@@ -26,22 +26,12 @@ class CreateNewCourseActivity : AppCompatActivity() {
     private lateinit var saveData: SaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        saveData = SaveData(this)
-        if (saveData.loadDarkModeState() == true) {
-            setTheme(R.style.DarkTheme)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        setTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_new_course)
 
-        toolbar = findViewById(R.id.toolbar)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.createCourseToolbarTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setTools()
 
         createCourseButtonC.setOnClickListener {
             createNewCourse()
@@ -50,6 +40,22 @@ class CreateNewCourseActivity : AppCompatActivity() {
         /*cancelTextViewC.setOnClickListener {
             startActivity(Intent(this, CoursesListActivity::class.java))
         }*/
+    }
+
+    private fun setTheme() {
+        saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            setTheme(R.style.DarkTheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+    }
+
+    private fun setTools() {
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setTitle(R.string.createCourseToolbarTitle)
     }
 
     private fun createNewCourse() {
@@ -62,7 +68,7 @@ class CreateNewCourseActivity : AppCompatActivity() {
 
         if (courseTitle.isEmpty() || description.isEmpty() || courseUrl.isEmpty())
         {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.allFields, Toast.LENGTH_SHORT).show()
         } else {
         val course = Course(uid, courseUrl, courseTitle, description)
 
@@ -75,7 +81,7 @@ class CreateNewCourseActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
             }
         }
     }

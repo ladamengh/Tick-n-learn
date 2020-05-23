@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
-    tools:context="com.example.awesomeproject.messages.NewMessageActivity">
+    tools:context="com.example.awesomeproject.messages.NewDialogActivity">
 
     <include
         android:id="@+id/toolbar"

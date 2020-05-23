@@ -7,42 +7,46 @@
     android:background="?attr/backgroundColor"
     tools:context="com.example.awesomeproject.courses.InfoActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_layout"/>
-
-        <ImageView
-            android:id="@+id/infoImageView"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"
-            tools:background="@color/colorAccent"/>
-
-        <TextView
-            android:id="@+id/infoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/textColor"
-            android:padding="20dp"
-            tools:text = "text"/>
-
-        <Button
-            android:id="@+id/goToQuizButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/buttonColor"
-            android:text="Пройти тест"
-            android:textColor="?attr/textColor"
-            android:textStyle="bold"
-            android:layout_margin="20dp"/>
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
 
-</LinearLayout>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_layout"/>
+
+            <ImageView
+                android:id="@+id/infoImageView"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                tools:background="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                tools:text = "text"
+                android:textColor="?attr/textColor"
+                android:padding="20dp" />
+
+            <Button
+                android:id="@+id/goToQuizButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/goToTest"
+                android:textColor="?attr/textColor"
+                android:textStyle="bold"
+
+                android:background="?attr/buttonColor"
+                android:layout_margin="20dp"/>
+
+        </LinearLayout>
 
 </ScrollView>

@@ -69,7 +69,25 @@
             android:id="@+id/scoreBar"
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:text = "0"
+            android:text = "@string/_0"
+            android:textAlignment="center"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text = "@string/outOf"
+            android:textAlignment="center"
+            android:textColor="?attr/textColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/questionNum"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:text = "@string/_0"
             android:textAlignment="center"
             android:textColor="?attr/textColor"
             android:textSize="24sp" />
