@@ -72,5 +72,9 @@
     <string name="themeList"><![CDATA[< Список тем]]></string>
     <string name="goBackToCourse"><![CDATA[< Список курсов]]></string>
     <string name="cancel">Отмена</string>
+    <string name="opponentResult">Результат оппонента</string>
+    <string name="questionNum">Всего вопросов</string>
+    <string name="_15">15</string>
+    <string name="secondsLeft">Секунд осталось</string>
 
 </resources>

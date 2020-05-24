@@ -40,12 +40,18 @@
 
     <Button
         android:id="@+id/createNewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
 
         android:text="@string/plus"
-        android:visibility="gone"
+        android:textStyle="bold"
 
+        android:visibility="gone"
+        android:background="@drawable/select_photo_rounded"
+
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -3,6 +3,7 @@ package com.example.awesomeproject.courses
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
 import com.example.awesomeproject.SaveData
@@ -15,6 +16,7 @@ class FinishTestActivity : AppCompatActivity() {
     private lateinit var coursePartUid: String
     private lateinit var coursePartTitle: String
     private lateinit var score: String
+    private lateinit var scoreComputer: String
     private lateinit var numQuestions: String
     private lateinit var saveData: SaveData
 
@@ -25,6 +27,7 @@ class FinishTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_finish_test)
 
         setTools()
+        setWinner()
         goBackTextView.setOnClickListener { goBack() }
     }
 
@@ -42,17 +45,28 @@ class FinishTestActivity : AppCompatActivity() {
 
         coursePartTitle = intent.getStringExtra("coursePartTitle") ?: ""
         score = intent.getStringExtra("score") ?: ""
+        scoreComputer = intent.getStringExtra("scoreComputer") ?: ""
         numQuestions = intent.getStringExtra("numQuestions") ?: ""
         courseUid = intent.getStringExtra("courseUid") ?: ""
         coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = coursePartTitle
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+        scoreComputerText.text = scoreComputer
         scoreBar.text = score
         questionNum.text = numQuestions
     }
+
+    private fun setWinner() {
+        if (score > scoreComputer) {
+            imageWinner.visibility = View.VISIBLE
+        } else {
+            imageLoser.visibility = View.VISIBLE
+        }
+    }
+
     private fun goBack() {
         val intent = Intent(Intent(this, InfoActivity::class.java))
         intent.putExtra("courseUid", courseUid)

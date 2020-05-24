@@ -14,6 +14,7 @@ import com.example.awesomeproject.models.ScoreItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_quiz.*
+import kotlin.random.Random
 
 class QuizActivity : AppCompatActivity() {
 
@@ -25,6 +26,7 @@ class QuizActivity : AppCompatActivity() {
     private var timeLeft: Long = 0L
     private var countQuestions: Int = 0
     private var score: Int = 0
+    private var scoreComputer: Int = 0
     private var answer: String? = null
     private var questionNumber: Int = 1
     private var instance = FirebaseDatabase.getInstance()
@@ -45,10 +47,22 @@ class QuizActivity : AppCompatActivity() {
         resetTimer()
         startTimer()
 
-        buttonChoice1.setOnClickListener { buttonOnClick(buttonChoice1) }
-        buttonChoice2.setOnClickListener { buttonOnClick(buttonChoice2) }
-        buttonChoice3.setOnClickListener { buttonOnClick(buttonChoice3) }
-        buttonChoice4.setOnClickListener { buttonOnClick(buttonChoice4) }
+        buttonChoice1.setOnClickListener {
+            buttonOnClick(buttonChoice1)
+            computerMove()
+        }
+        buttonChoice2.setOnClickListener {
+            buttonOnClick(buttonChoice2)
+            computerMove()
+        }
+        buttonChoice3.setOnClickListener {
+            buttonOnClick(buttonChoice3)
+            computerMove()
+        }
+        buttonChoice4.setOnClickListener {
+            buttonOnClick(buttonChoice4)
+            computerMove()
+        }
         buttonCancel.setOnClickListener { stopTest() }
     }
 
@@ -56,7 +70,7 @@ class QuizActivity : AppCompatActivity() {
         scoreBar.text = score.toString()
         questionNum.text = countQuestions.toString()
 
-        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: "Title"
+        coursePartTitle = intent.getStringExtra("coursePartTitle") ?: ""
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -75,7 +89,6 @@ class QuizActivity : AppCompatActivity() {
 
     private fun resetTimer() {
         val initialTimeLeft = initialCountDown / 1000
-
         timeBar.text = initialTimeLeft.toString()
         countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
@@ -92,6 +105,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun buttonOnClick(buttonChoice: Button) {
         countDownTimer.cancel()
+
         if (buttonChoice.text == answer) {
             buttonChoice.setBackgroundResource(R.color.colorGreen)
             updateScore()
@@ -116,6 +130,47 @@ class QuizActivity : AppCompatActivity() {
                 }
             } else {
                 finishTest()
+            }
+        }
+    }
+
+    private fun computerMove() {
+        when ((1..4).random()) {
+            1 -> {
+                if (buttonChoice1.text == answer) {
+                    buttonChoice1.setBackgroundResource(R.color.colorGreen)
+                    scoreComputer++
+                    scoreComputerBar.text = scoreComputer.toString()
+                } else {
+                    buttonChoice1.setBackgroundResource(R.color.colorRed)
+                }
+            }
+            2 -> {
+                if (buttonChoice2.text == answer) {
+                    buttonChoice2.setBackgroundResource(R.color.colorGreen)
+                    scoreComputer++
+                    scoreComputerBar.text = scoreComputer.toString()
+                } else {
+                    buttonChoice2.setBackgroundResource(R.color.colorRed)
+                }
+            }
+            3 -> {
+                if (buttonChoice3.text == answer) {
+                    buttonChoice3.setBackgroundResource(R.color.colorGreen)
+                    scoreComputer++
+                    scoreComputerBar.text = scoreComputer.toString()
+                } else {
+                    buttonChoice3.setBackgroundResource(R.color.colorRed)
+                }
+            }
+            4 -> {
+                if (buttonChoice4.text == answer) {
+                    buttonChoice4.setBackgroundResource(R.color.colorGreen)
+                    scoreComputer++
+                    scoreComputerBar.text = scoreComputer.toString()
+                } else {
+                    buttonChoice4.setBackgroundResource(R.color.colorRed)
+                }
             }
         }
     }
@@ -235,6 +290,7 @@ class QuizActivity : AppCompatActivity() {
         intent.putExtra("coursePartUid", coursePartUid)
         intent.putExtra("coursePartTitle", coursePartTitle)
         intent.putExtra("score", score.toString())
+        intent.putExtra("scoreComputer", scoreComputer.toString())
         intent.putExtra("numQuestions", countQuestions.toString())
         startActivity(intent)
         finish()
