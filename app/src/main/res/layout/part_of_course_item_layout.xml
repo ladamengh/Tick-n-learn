@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/backgroundColor"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/coursePartRecyclerViewImage"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
 
         android:layout_margin="15dp"
-        tools:background="@color/colorPrimary"
+        android:background="@drawable/select_photo_rounded"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +25,9 @@
             tools:text = "@string/title"
             android:textColor="?attr/textColor"
             android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

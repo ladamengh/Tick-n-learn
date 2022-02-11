@@ -33,11 +33,11 @@ class CoursesListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme()
-        fetchCourses()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_courses_list)
 
+        fetchCourses()
         setTools()
         setNavigation()
         checkAdmin()
@@ -55,7 +55,7 @@ class CoursesListActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.coursesToolbarTitle)
+        titleToolbar.setText(R.string.coursesToolbarTitle)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         yourCoursesRecyclerView
@@ -128,6 +128,7 @@ class CoursesListActivity : AppCompatActivity() {
 
     private fun searchCourse(searchText: String) {
         val adapter = GroupAdapter<GroupieViewHolder>()
+
         if (searchText.isEmpty()) {
             fetchCourses()
         } else {
@@ -175,6 +176,7 @@ class CoursesListActivity : AppCompatActivity() {
                 for (ds in dataSnapshot.children) {
                     val value = ds.getValue(String::class.java)
                     if(value.equals(uid)) {
+                        createNewButton.isEnabled = true
                         createNewButton.visibility = View.VISIBLE
                         break
                     } else {

@@ -18,6 +18,7 @@ class InfoActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var courseUid: String
+    private lateinit var courseTitle: String
     private lateinit var coursePartUid: String
     private lateinit var coursePartTitle: String
     private var countQuestions: Int = 0
@@ -28,6 +29,7 @@ class InfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
 
+        setBack()
         setTools()
         setInfo()
         countQuestions()
@@ -51,11 +53,21 @@ class InfoActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.title = coursePartTitle
+        titleToolbar.text = coursePartTitle
+    }
+
+    private fun setBack() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            layoutInfo.setBackgroundResource(R.drawable.black)
+        } else {
+            layoutInfo.setBackgroundResource(R.drawable.courses_background)
+        }
     }
 
     private fun setInfo() {
         courseUid = intent.getStringExtra("courseUid") ?: ""
+        courseTitle = intent.getStringExtra("courseTitle") ?: "Темы"
         coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
 
         val ref = FirebaseDatabase.getInstance()
@@ -111,6 +123,7 @@ class InfoActivity : AppCompatActivity() {
     private fun goToTheme() {
         val intent = Intent(Intent(this, CoursePartsActivity::class.java))
         intent.putExtra("courseUid", courseUid)
+        intent.putExtra("courseTitle", courseTitle)
         startActivity(intent)
     }
 }

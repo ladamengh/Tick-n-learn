@@ -1,100 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="?attr/backgroundColor"
     tools:context=".courses.CreateNewCourseActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_layout"/>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
 
-        android:layout_below="@id/toolbar"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="16dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <ImageView
-            android:id="@+id/courseImageViewC"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-
-            android:background="@mipmap/ic_book_foreground" />
-
-        <EditText
-            android:id="@+id/titleEditTextC"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:hint="@string/title"
-            android:ems="10"
-            android:textColor="?attr/textColor"
-            android:textColorHint="?attr/textColor"
-
-            android:paddingLeft="16dp"
-            android:backgroundTint="?attr/textColor"/>
-
-        <EditText
-            android:id="@+id/imageUrlEditTextC"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-
-            android:hint="@string/imageURL"
-            android:ems="10"
-            android:textColor="?attr/textColor"
-            android:textColorHint="?attr/textColor"
-
-            android:paddingLeft="16dp"
-            android:backgroundTint="?attr/textColor"/>
-
-        <EditText
-            android:id="@+id/descriptionEditTextC"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:hint="@string/smallDescription"
-            android:textColor="?attr/textColor"
-            android:textColorHint="?attr/textColor"
-            android:ems="10"
-
-            android:paddingLeft="16dp"
-            android:backgroundTint="?attr/textColor"/>
-
-        <Button
-            android:id="@+id/createCourseButtonC"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="@string/goToCreatingTheme"
-            android:textColor="?attr/textColor"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-
-            android:layout_margin="30dp"
-            android:background="?attr/buttonColor"/>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_layout"/>
 
         <TextView
-            android:id="@+id/cancelText"
+            android:id="@+id/titleToolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="@string/cancel"
-            android:textColor="?attr/hintColor"
-            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
             android:textStyle="bold"
 
-            android:layout_margin="8dp" />
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            tools:text="Создание нового курса"
+            tools:textColor="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/toolbar"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ImageView
+                android:id="@+id/courseImageViewC"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+
+                android:background="@mipmap/ic_book_foreground" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/title"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titleEditTextC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+
+                    android:paddingLeft="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/imageURL"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/imageUrlEditTextC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+
+                    android:paddingLeft="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/smallDescription"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionEditTextC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+
+                    android:paddingLeft="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/createCourseButtonC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/goToCreatingTheme"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+
+                android:layout_margin="30dp"
+                android:background="@drawable/button"/>
+
+            <TextView
+                android:id="@+id/cancelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/cancel"
+                android:textColor="?attr/hintColor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                android:layout_margin="8dp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

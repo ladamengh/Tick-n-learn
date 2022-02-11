@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="#C8E6C9"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/courseRecyclerViewImage"
-        android:layout_width="200dp"
+        android:layout_width="130dp"
         android:layout_height="130dp"
-        tools:background="@color/colorPrimary"
+        android:background="@drawable/select_photo_rounded"
+
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,10 +22,11 @@
         android:id="@+id/courseItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
 
+        android:orientation="vertical"
         android:layout_margin="10dp"
         android:gravity="center"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,10 @@
             android:id="@+id/courseTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:textAlignment="center"
+            android:fontFamily="sans-serif"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="?attr/textColor"
             tools:text = "Название"/>
@@ -44,8 +48,12 @@
             android:id="@+id/courseDescriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="10dp"
             android:textColor="?attr/textColor"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:textAlignment="center"
             tools:text = "Описание"/>
 
     </LinearLayout>

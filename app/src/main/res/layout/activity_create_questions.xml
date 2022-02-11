@@ -1,171 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:background="?attr/backgroundColor"
+    tools:context="com.example.awesomeproject.courses.CreateQuestionsActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/backgroundColor"
-    tools:context="com.example.awesomeproject.courses.CreateQuestionsActivity">
+    android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_layout" />
-
-    <LinearLayout
-        android:id="@+id/questionNumLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
 
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_layout" />
 
         <TextView
-            android:id="@+id/numberOfQuestionCreating"
+            android:id="@+id/titleToolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="@string/numberCreateQuestion"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
-            android:textColor="?attr/textColor"
-            android:textSize="16sp" />
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold"
 
-        <TextView
-            android:id="@+id/numberQBar"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
 
-            tools:text = "1"
-            android:textAlignment="center"
+            tools:text="Добавление вопросов"
+            tools:textColor="@color/colorAccent" />
+
+        <LinearLayout
+            android:id="@+id/questionNumLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="10dp"
             android:gravity="center"
-            android:textColor="?attr/textColor"
-            android:textSize="16sp" />
+            android:orientation="horizontal"
 
-    </LinearLayout>
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/numberOfQuestionCreating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        android:layout_margin="20dp"
-        android:orientation="vertical"
+                android:text="@string/numberCreateQuestion"
+                android:textAlignment="center"
+                android:textColor="?attr/textColor"
+                android:textSize="16sp" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            <TextView
+                android:id="@+id/numberQBar"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
 
-        <EditText
-            android:id="@+id/createQuestion"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="?attr/textColor"
+                android:textSize="16sp"
+                tools:text="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:hint="@string/enterQuestion"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            android:layout_margin="20dp"
+            android:orientation="vertical"
 
-        <EditText
-            android:id="@+id/createChoice1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-            android:hint="@string/firstChoice"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:textSize="16sp" />
+                <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/enterQuestion"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
 
-        <EditText
-            android:id="@+id/createChoice2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/createQuestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-            android:hint="@string/secondChoice"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:textSize="16sp" />
+                        android:ems="10"
+                        android:textColor="?attr/textColor"
+                        android:textColorHint="?attr/textColor"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
 
-        <EditText
-            android:id="@+id/createChoice3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                        android:paddingLeft="16dp" />
 
-            android:hint="@string/thirdChoice"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/createChoice4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/firstChoice"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
 
-            android:hint="@string/fourthChoice"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:textSize="16sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/createChoice1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-        <EditText
-            android:id="@+id/createAnswer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
 
-            android:layout_margin="15dp"
+                    android:paddingLeft="16dp" />
 
-            android:hint="@string/answer"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/secondChoice"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
 
-    <Button
-        android:id="@+id/createQuestionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/createChoice2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-        android:layout_margin="30dp"
-        android:background="?attr/buttonColor"
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
 
-        android:text="@string/saveQuestion"
-        android:textColor="?attr/textColor"
-        android:textStyle="bold"
-        android:textAllCaps="false"
+                    android:paddingLeft="16dp" />
 
-        app:layout_constraintBottom_toTopOf="@+id/endCreatingQuestionButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/endCreatingQuestionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/thirdChoice"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
 
-        android:background="@android:color/transparent"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/createChoice3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-        android:text="@string/endCreating"
-        android:textColor="?attr/textColor"
-        android:textStyle="bold"
-        android:textAllCaps="false"
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                    android:paddingLeft="16dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/fourthChoice"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/createChoice4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+
+                    android:paddingLeft="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:backgroundTint="?attr/hintColor"
+                android:hint="@string/answer"
+                android:textColorHint="?attr/hintColor"
+                app:boxBackgroundColor="?attr/hintColor"
+                app:boxStrokeColor="?attr/hintColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/createAnswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:textColor="?attr/textColor"
+                    android:textColorHint="?attr/textColor"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+
+                    android:paddingLeft="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/createQuestionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/button"
+
+                android:text="@string/saveQuestion"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/endCreatingQuestionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@android:color/transparent"
+
+                android:text="@string/endCreating"
+                android:textColor="?attr/textColor"
+                android:textStyle="bold"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 

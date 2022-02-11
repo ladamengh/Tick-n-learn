@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/backgroundColor"
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
@@ -12,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@mipmap/ic_planet_foreground"
+        android:src="@mipmap/ic_hand_foreground"
 
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintBottom_toBottomOf="parent"

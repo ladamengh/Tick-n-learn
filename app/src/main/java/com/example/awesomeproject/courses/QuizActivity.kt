@@ -5,7 +5,7 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
@@ -14,7 +14,6 @@ import com.example.awesomeproject.models.ScoreItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_quiz.*
-import kotlin.random.Random
 
 class QuizActivity : AppCompatActivity() {
 
@@ -42,10 +41,9 @@ class QuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quiz)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
+        resetTimer()
         updateQuestion()
         setTools()
-        resetTimer()
-        startTimer()
 
         buttonChoice1.setOnClickListener {
             buttonOnClick(buttonChoice1)
@@ -75,7 +73,7 @@ class QuizActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.title = coursePartTitle
+        titleToolbar.text = coursePartTitle
     }
 
     private fun setTheme() {
@@ -97,37 +95,35 @@ class QuizActivity : AppCompatActivity() {
             }
             override fun onFinish() {
                 Toast.makeText(baseContext, R.string.timeIsUp, Toast.LENGTH_LONG).show()
-                updateQuestion()
+                if (questionNumber <= countQuestions) {
+                    updateQuestion()
+                } else {
+                    finishTest()
+                }
             }
         }
         gameStarted = false
     }
 
-    private fun buttonOnClick(buttonChoice: Button) {
+    private fun buttonOnClick(buttonChoice: TextView) {
         countDownTimer.cancel()
 
         if (buttonChoice.text == answer) {
-            buttonChoice.setBackgroundResource(R.color.colorGreen)
+            buttonChoice.setBackgroundResource(R.drawable.button_right)
             updateScore()
 
             if (questionNumber <= countQuestions) {
-                updateQuestion()
                 resetTimer()
-                if (!gameStarted) {
-                    startTimer()
-                }
+                updateQuestion()
             } else {
                 finishTest()
             }
         } else {
-            buttonChoice.setBackgroundResource(R.color.colorRed)
+            buttonChoice.setBackgroundResource(R.drawable.button_wrong)
 
             if (questionNumber <= countQuestions) {
-                updateQuestion()
                 resetTimer()
-                if (!gameStarted) {
-                    startTimer()
-                }
+                updateQuestion()
             } else {
                 finishTest()
             }
@@ -138,44 +134,46 @@ class QuizActivity : AppCompatActivity() {
         when ((1..4).random()) {
             1 -> {
                 if (buttonChoice1.text == answer) {
-                    buttonChoice1.setBackgroundResource(R.color.colorGreen)
+                    buttonChoice1.setBackgroundResource(R.drawable.button_right)
                     scoreComputer++
                     scoreComputerBar.text = scoreComputer.toString()
                 } else {
-                    buttonChoice1.setBackgroundResource(R.color.colorRed)
+                    buttonChoice1.setBackgroundResource(R.drawable.button_wrong)
                 }
             }
             2 -> {
                 if (buttonChoice2.text == answer) {
-                    buttonChoice2.setBackgroundResource(R.color.colorGreen)
+                    buttonChoice2.setBackgroundResource(R.drawable.button_right)
                     scoreComputer++
                     scoreComputerBar.text = scoreComputer.toString()
                 } else {
-                    buttonChoice2.setBackgroundResource(R.color.colorRed)
+                    buttonChoice2.setBackgroundResource(R.drawable.button_wrong)
                 }
             }
             3 -> {
                 if (buttonChoice3.text == answer) {
-                    buttonChoice3.setBackgroundResource(R.color.colorGreen)
+                    buttonChoice3.setBackgroundResource(R.drawable.button_right)
                     scoreComputer++
                     scoreComputerBar.text = scoreComputer.toString()
                 } else {
-                    buttonChoice3.setBackgroundResource(R.color.colorRed)
+                    buttonChoice3.setBackgroundResource(R.drawable.button_wrong)
                 }
             }
             4 -> {
                 if (buttonChoice4.text == answer) {
-                    buttonChoice4.setBackgroundResource(R.color.colorGreen)
+                    buttonChoice4.setBackgroundResource(R.drawable.button_right)
                     scoreComputer++
                     scoreComputerBar.text = scoreComputer.toString()
                 } else {
-                    buttonChoice4.setBackgroundResource(R.color.colorRed)
+                    buttonChoice4.setBackgroundResource(R.drawable.button_wrong)
                 }
             }
         }
     }
 
     private fun updateQuestion() {
+        gameStarted = false
+        startTimer()
 
         courseUid = intent.getStringExtra("courseUid") ?: ""
         coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
@@ -202,7 +200,7 @@ class QuizActivity : AppCompatActivity() {
         choice1Ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(choice1ds: DataSnapshot) {
                 val choice = choice1ds.value.toString()
-                buttonChoice1.setBackgroundResource(R.color.colorButton)
+                buttonChoice1.setBackgroundResource(R.drawable.button)
                 buttonChoice1.text = choice
             }
             override fun onCancelled(error: DatabaseError) {
@@ -216,7 +214,7 @@ class QuizActivity : AppCompatActivity() {
         choice2Ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(choice2ds: DataSnapshot) {
                 val choice = choice2ds.value.toString()
-                buttonChoice2.setBackgroundResource(R.color.colorButton)
+                buttonChoice2.setBackgroundResource(R.drawable.button)
                 buttonChoice2.text = choice
             }
             override fun onCancelled(error: DatabaseError) {
@@ -230,7 +228,7 @@ class QuizActivity : AppCompatActivity() {
         choice3Ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(choice3ds: DataSnapshot) {
                 val choice = choice3ds.value.toString()
-                buttonChoice3.setBackgroundResource(R.color.colorButton)
+                buttonChoice3.setBackgroundResource(R.drawable.button)
                 buttonChoice3.text = choice
             }
             override fun onCancelled(error: DatabaseError) {
@@ -244,7 +242,7 @@ class QuizActivity : AppCompatActivity() {
         choice4Ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(choice4ds: DataSnapshot) {
                 val choice = choice4ds.value.toString()
-                buttonChoice4.setBackgroundResource(R.color.colorButton)
+                buttonChoice4.setBackgroundResource(R.drawable.button)
                 buttonChoice4.text = choice
             }
             override fun onCancelled(error: DatabaseError) {
@@ -275,6 +273,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun stopTest() {
+        countDownTimer.cancel()
         val intent = Intent(Intent(this, InfoActivity::class.java))
         intent.putExtra("courseUid", courseUid)
         intent.putExtra("coursePartUid", coursePartUid)

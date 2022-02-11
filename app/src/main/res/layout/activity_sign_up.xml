@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,21 +11,47 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout"/>
 
+    <TextView
+        android:id="@+id/titleToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:text="Регистрация"
+        tools:textColor="@color/colorAccent" />
+
     <LinearLayout
         android:id="@+id/layoutRegistration"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+
         android:gravity="center_horizontal"
-        android:layout_below="@id/toolbar"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:padding="16dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/photoImageViewR"
             android:layout_width="150dp"
             android:layout_height="150dp"
 
-            android:background="@drawable/select_photo_rounded"/>
+            android:background="@drawable/select_photo_rounded"
+            android:layout_marginBottom="15dp"/>
 
         <TextView
             android:id="@+id/photoButtonR"
@@ -34,73 +60,94 @@
 
             android:text="@string/choosePhoto"
             android:textColor="?attr/textColor"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"/>
 
-        <EditText
-            android:id="@+id/usernameEditTextR"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:backgroundTint="?attr/hintColor"
             android:hint="@string/username"
-            android:inputType="textPersonName"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
+            android:textColorHint="?attr/hintColor"
+            app:boxBackgroundColor="?attr/hintColor"
+            app:boxStrokeColor="?attr/hintColor">
 
-            android:paddingLeft="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameEditTextR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <EditText
-            android:id="@+id/emailEditTextR"
+                android:inputType="text"
+                android:paddingLeft="16dp"
+                android:textColor="?attr/textColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:backgroundTint="?attr/hintColor"
             android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
+            android:textColorHint="?attr/hintColor"
+            app:boxBackgroundColor="?attr/hintColor"
+            app:boxStrokeColor="?attr/hintColor">
 
-            android:paddingLeft="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditTextR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <EditText
-            android:id="@+id/passwordEditTextR"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="16dp"
+                android:textColor="?attr/textColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:backgroundTint="?attr/hintColor"
             android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textColor="?attr/textColor"
-            android:textColorHint = "?attr/textColor"
-            android:backgroundTint="?attr/textColor"
+            android:textColorHint="?attr/hintColor"
+            app:boxBackgroundColor="?attr/hintColor"
+            app:boxStrokeColor="?attr/hintColor">
 
-            android:layout_marginTop="8dp"
-            android:paddingLeft="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditTextR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="textPassword"
+                android:paddingLeft="16dp"
+                android:textColor="?attr/textColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/registerButtonR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/register"
-            android:textStyle="bold"
-            android:textColor="?attr/textColor"
-            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button"
 
-            android:background="?attr/buttonColor"
-            android:layout_marginTop="8dp"/>
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/alreadyHaveAccountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:layout_marginTop="8dp"
             android:text="@string/alreadyReg"
             android:textColor="?attr/textColor"
             android:textSize="16sp"
-            android:textStyle="bold"
 
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*
+import kotlinx.android.synthetic.main.activity_new_message.titleToolbar
 import java.util.*
 
 class NewDialogActivity : AppCompatActivity() {
@@ -40,6 +41,10 @@ class NewDialogActivity : AppCompatActivity() {
         searchText.doOnTextChanged { _, _, _, _ ->
             searchUser(searchText.text.toString().trim())
         }
+
+        goBackMessage.setOnClickListener {
+            startActivity(Intent(this, LatestMessagesActivity::class.java))
+        }
     }
 
     private fun setTheme() {
@@ -57,8 +62,8 @@ class NewDialogActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.newMessageToolbarTitle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        titleToolbar.setText(R.string.newMessageToolbarTitle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
 
@@ -107,12 +112,14 @@ class NewDialogActivity : AppCompatActivity() {
 
             searchQuery.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(userSearchSnapshot: DataSnapshot) {
+
                     userSearchSnapshot.children.forEach {
                         val user = it.getValue(User::class.java)
                         adapter.add(UserItem(user!!))
                     }
 
                     adapter.setOnItemClickListener { item, view ->
+
                         val userItem = item as UserItem
                         val intent = Intent(view.context, ChatLogActivity::class.java)
                         intent.putExtra(USER_KEY, userItem.user)

@@ -18,6 +18,9 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_course_part.*
+import kotlinx.android.synthetic.main.activity_course_part.titleToolbar
+import kotlinx.android.synthetic.main.activity_courses_list.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class CoursePartsActivity : AppCompatActivity() {
 
@@ -34,6 +37,8 @@ class CoursePartsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_part)
 
+        courseTitle = intent.getStringExtra("courseTitle") ?: "Темы"
+
         setTools()
         fetchParts()
 
@@ -43,11 +48,10 @@ class CoursePartsActivity : AppCompatActivity() {
     }
 
     private fun setTools() {
-        courseTitle = intent.getStringExtra("courseTitle") ?: ""
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = courseTitle
+        titleToolbar.text = courseTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         recyclerViewNewCoursePart.addItemDecoration(
@@ -112,6 +116,7 @@ class CoursePartsActivity : AppCompatActivity() {
             R.id.menuProgress -> {
                 val intent = Intent(this, ProgressActivity::class.java)
                 intent.putExtra("courseUid", courseUid)
+                intent.putExtra("courseTitle", courseTitle)
                 startActivity(intent)
             }
         }

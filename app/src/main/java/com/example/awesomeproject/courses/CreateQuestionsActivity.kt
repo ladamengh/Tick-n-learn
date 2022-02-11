@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_create_questions.*
 
 class CreateQuestionsActivity : AppCompatActivity() {
 
-    private val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
     private var questionNumber: Int = 1
     private lateinit var saveData: SaveData
@@ -50,7 +49,7 @@ class CreateQuestionsActivity : AppCompatActivity() {
         courseTitle = intent.getStringExtra("courseTitle") ?: ""
 
         setSupportActionBar(toolbar)
-        supportActionBar?.title = courseTitle
+        titleToolbar.text = courseTitle
     }
 
     private fun createNewQuestion() {

@@ -1,12 +1,8 @@
 package com.example.awesomeproject.courses
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
@@ -14,9 +10,7 @@ import com.example.awesomeproject.SaveData
 import com.example.awesomeproject.models.Course
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_create_new_course.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
 
 class CreateNewCourseActivity : AppCompatActivity() {
@@ -51,7 +45,7 @@ class CreateNewCourseActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.createCourseToolbarTitle)
+        titleToolbar.setText(R.string.createCourseToolbarTitle)
     }
 
     private fun createNewCourse() {

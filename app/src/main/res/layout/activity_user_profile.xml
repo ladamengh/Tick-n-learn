@@ -11,6 +11,26 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout"/>
 
+    <TextView
+        android:id="@+id/titleToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:text="Ваш профиль"
+        tools:textColor="@color/colorAccent" />
+
     <LinearLayout
         android:id="@+id/linearLayoutUser"
         android:layout_width="match_parent"
@@ -44,9 +64,7 @@
             android:ems="10"
             android:textSize="12sp"
             android:textStyle="bold"
-
-            android:paddingStart="16dp"
-            android:layout_marginLeft="10dp"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/usernameTextViewP"
@@ -59,10 +77,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textIsSelectable="true"
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:paddingStart="16dp" />
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/uidLabelTextViewP"
@@ -74,10 +89,9 @@
             android:ems="10"
             android:textSize="12sp"
             android:textStyle="bold"
+            android:textAlignment="center"
 
-            android:paddingStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/uidTextViewP"
@@ -89,10 +103,7 @@
             android:textColor="?attr/textColor"
             android:textSize="14sp"
             android:textIsSelectable="true"
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:paddingStart="16dp"/>
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -101,20 +112,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:padding="35dp"
         android:text="@string/darkMode"
         android:textColor="?attr/textColor"
 
-        android:padding="40dp"
-        app:layout_constraintVertical_bias="0.9"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.9" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="?attr/toolbarColor"
+        android:background="?attr/backgroundColor"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
 

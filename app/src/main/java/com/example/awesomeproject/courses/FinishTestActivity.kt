@@ -51,7 +51,7 @@ class FinishTestActivity : AppCompatActivity() {
         coursePartUid = intent.getStringExtra("coursePartUid") ?: ""
 
         setSupportActionBar(toolbar)
-        supportActionBar?.title = coursePartTitle
+        titleToolbar.text = coursePartTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         scoreComputerText.text = scoreComputer

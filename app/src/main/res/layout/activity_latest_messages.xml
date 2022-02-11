@@ -11,6 +11,26 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
+    <TextView
+        android:id="@+id/titleToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:text="Диалоги"
+        tools:textColor="@color/colorAccent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/latestMessagesRecyclerView"
         android:layout_width="match_parent"
@@ -27,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="?attr/toolbarColor"
+        android:background="?attr/backgroundColor"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
 
@@ -43,7 +63,8 @@
         android:layout_height="wrap_content"
 
         android:layout_gravity="center"
-        android:background="?attr/backgroundMessageColor"
+        android:backgroundTint="?attr/backgroundMessageColor"
+        android:background="@drawable/button"
         android:padding="5dp"
         android:visibility="gone"
         tools:visibility="visible"
@@ -87,18 +108,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/noInternetTextView"
             app:layout_constraintVertical_bias="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-
-            android:src="@mipmap/ic_globe_foreground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noInternetTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,11 +1,9 @@
 package com.example.awesomeproject
 
 import android.content.Intent
-import com.example.awesomeproject.R
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.SplashScreenActivity.Companion.currentUser
@@ -64,7 +62,7 @@ class UserProfileActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.profileToolbarTitle)
+        titleToolbar.setText(R.string.profileToolbarTitle)
 
         val uid = intent.getStringExtra("userUid")
         val username = intent.getStringExtra("username")

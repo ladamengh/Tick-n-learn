@@ -6,7 +6,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.awesomeproject.R
@@ -23,7 +22,7 @@ class SignUpActivity : AppCompatActivity() {
 
     val auth = FirebaseAuth.getInstance()
     private lateinit var toolbar: Toolbar
-    var selectedPhotoUri: Uri? = null
+    private var selectedPhotoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme()
@@ -61,7 +60,7 @@ class SignUpActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.registration)
+        titleToolbar.setText(R.string.registration)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

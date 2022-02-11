@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.auth)
+        titleToolbar.setText(R.string.auth)
     }
 
     private fun loginUser() {

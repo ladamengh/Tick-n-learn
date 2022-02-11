@@ -1,5 +1,6 @@
 package com.example.awesomeproject.messages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -35,11 +36,16 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
+        setBack()
         listenForMessages()
         setTools()
 
         sendButtonChatLog.setOnClickListener {
             sendMessage()
+        }
+
+        goBackDialog.setOnClickListener {
+            startActivity(Intent(this, LatestMessagesActivity::class.java))
         }
     }
 
@@ -52,12 +58,21 @@ class ChatLogActivity : AppCompatActivity() {
         }
     }
 
+    private fun setBack() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            layoutChatLog.setBackgroundResource(R.drawable.black)
+        } else {
+            layoutChatLog.setBackgroundResource(R.drawable.pen_background)
+        }
+    }
+
     private fun setTools() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.title = toUser?.username
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        titleToolbar.text = toUser?.username
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun listenForMessages() {
@@ -106,16 +121,20 @@ class ChatLogActivity : AppCompatActivity() {
         val chatMessage = ChatMessage(reference.key!!, text,
             fromId!!, toId!!, System.currentTimeMillis() / 1000) // time in seconds
 
-        reference.setValue(chatMessage)
-            .addOnSuccessListener {
-                messageEditTextChatLog.text.clear()
-                chatLogRecyclerView.scrollToPosition(adapter.itemCount - 1)
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, R.string.errorS, Toast.LENGTH_SHORT).show()
-            }
-        toReference.setValue(chatMessage)
-        latestMessageReference.setValue(chatMessage)
-        toLatestMessageReference.setValue(chatMessage)
+        if (messageEditTextChatLog.text.isNotEmpty()) {
+            reference.setValue(chatMessage)
+                .addOnSuccessListener {
+                    messageEditTextChatLog.text.clear()
+                    chatLogRecyclerView.scrollToPosition(adapter.itemCount - 1)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, R.string.errorS, Toast.LENGTH_SHORT).show()
+                }
+            toReference.setValue(chatMessage)
+            latestMessageReference.setValue(chatMessage)
+            toLatestMessageReference.setValue(chatMessage)
+        } else {
+            Toast.makeText(this, R.string.emptyMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 }

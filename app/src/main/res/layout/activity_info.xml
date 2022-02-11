@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layoutInfo"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/backgroundColor"
     tools:context="com.example.awesomeproject.courses.InfoActivity">
 
@@ -13,29 +15,60 @@
             android:orientation="vertical"
             android:layout_gravity="center_horizontal">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar_layout"/>
 
-            <TextView
-                android:id="@+id/goBackTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/titleToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                android:text="@string/themeList"
-                android:textColor="?attr/hintColor"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="sans-serif"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
 
-                android:layout_margin="8dp"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                    app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                    app:layout_constraintStart_toStartOf="@+id/toolbar"
+                    app:layout_constraintTop_toTopOf="parent"
 
-            <ImageView
+                    tools:text=""
+                    tools:textColor="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/goBackTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/chango"
+                    android:text="@string/_left"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/titleToolbar"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/infoImageView"
-                android:layout_width="300dp"
+                android:layout_width="200dp"
                 android:layout_height="200dp"
 
                 android:layout_margin="20dp"
                 android:layout_gravity="center"
+
                 tools:background="@color/colorAccent"/>
 
             <TextView
@@ -43,10 +76,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                tools:text = "text"
+                tools:text="text"
                 android:textColor="?attr/textColor"
                 android:textIsSelectable="true"
-                android:padding="20dp" />
+                android:textAlignment="center"
+                android:layout_margin="20dp" />
 
             <Button
                 android:id="@+id/goToQuizButton"
@@ -54,11 +88,13 @@
                 android:layout_height="wrap_content"
 
                 android:text="@string/goToTest"
-                android:textColor="?attr/textColor"
+                android:textColor="@android:color/white"
                 android:textStyle="bold"
+                android:textAllCaps="false"
 
-                android:background="?attr/buttonColor"
-                android:layout_margin="20dp"/>
+                android:background="@drawable/button"
+                android:backgroundTint="?attr/buttonColor"
+                android:layout_margin="20dp" />
 
         </LinearLayout>
 

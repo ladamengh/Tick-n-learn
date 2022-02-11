@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/backgroundColor"
+    android:background="@android:color/transparent"
     android:layout_marginBottom="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -27,10 +27,10 @@
 
         android:text="@string/testMessage"
         android:textSize="14sp"
-        android:textColor="?attr/textColor"
+        android:textColor="@android:color/white"
 
-        android:background="@drawable/button"
-        android:backgroundTint="?attr/backgroundMessageColor"
+        android:background="@drawable/message"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:maxWidth="240dp"
         android:padding="8dp"
 

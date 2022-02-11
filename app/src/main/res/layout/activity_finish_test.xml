@@ -12,6 +12,26 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
+    <TextView
+        android:id="@+id/titleToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:text="Результат"
+        tools:textColor="@color/colorAccent" />
+
     <ImageView
         android:id="@+id/imageWinner"
         android:layout_width="200dp"
@@ -34,6 +54,9 @@
         android:src="@mipmap/ic_fail_foreground"
         android:visibility="invisible"
 
+        tools:visibility="visible"
+        tools:src="@color/colorAccent"
+
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +69,7 @@
         android:layout_height="wrap_content"
 
         android:text="@string/yourResult"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textColor="?attr/textColor"
 
         app:layout_constraintVertical_bias="0.2"
@@ -78,7 +101,7 @@
             android:text="@string/_0"
             android:textAlignment="center"
             android:textColor="?attr/textColor"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/slash"
@@ -88,7 +111,7 @@
             android:text="@string/outOf"
             android:textAlignment="center"
             android:textColor="?attr/textColor"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/questionNum"
@@ -98,7 +121,7 @@
             android:text="@string/_0"
             android:textAlignment="center"
             android:textColor="?attr/textColor"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -109,7 +132,7 @@
 
         android:text="@string/opponentResult"
         android:textColor="?attr/textColor"
-        android:textSize="24sp"
+        android:textSize="20sp"
 
         app:layout_constraintVertical_bias="0.1"
         app:layout_constraintBottom_toBottomOf="parent"

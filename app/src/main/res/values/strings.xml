@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tick-n-Learn</string>
+    <string name="app_name">Tick-n-learn</string>
 
     <string name="registration">Регистрация</string>
     <string name="register">Зарегистрироваться</string>
@@ -63,6 +63,7 @@
     <string name="goToCreatingTests">Перейти к созданию тестов по теме</string>
     <string name="goToTest">Пройти тест</string>
     <string name="testMessage">Тестовое сообщение</string>
+    <string name="emptyMessage">Введите текст сообщения</string>
     <string name="plus">+</string>
     <string name="uid">Идентификатор</string>
     <string name="darkMode">Тёмный режим</string>
@@ -71,10 +72,17 @@
     <string name="out">Выйти</string>
     <string name="themeList"><![CDATA[< Список тем]]></string>
     <string name="goBackToCourse"><![CDATA[< Список курсов]]></string>
-    <string name="cancel">Отмена</string>
+    <string name="cancel">Отмена или завершение</string>
     <string name="opponentResult">Результат оппонента</string>
     <string name="questionNum">Всего вопросов</string>
     <string name="_15">15</string>
     <string name="secondsLeft">Секунд осталось</string>
+    <string name="profile">Профиль</string>
+    <string name="courses">Курсы</string>
+    <string name="dialogs">Диалоги</string>
+    <string name="sign_out">Выйти</string>
+    <string name="progress">Прогресс</string>
+    <string name="newDialog">Новый диалог</string>
+    <string name="_left"><![CDATA[<]]></string>
 
 </resources>

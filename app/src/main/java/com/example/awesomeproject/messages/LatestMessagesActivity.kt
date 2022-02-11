@@ -76,7 +76,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.latestMessagesToolbarTitle)
+        titleToolbar.setText(R.string.latestMessagesToolbarTitle)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         latestMessagesRecyclerView.addItemDecoration(

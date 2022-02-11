@@ -48,7 +48,7 @@ class CreateNewPartActivity : AppCompatActivity() {
         val courseTitle = intent.getStringExtra("courseTitle")
 
         setSupportActionBar(toolbar)
-        supportActionBar?.title = courseTitle
+        titleToolbar.text = courseTitle
     }
 
     private fun createNewPart() {
@@ -64,20 +64,20 @@ class CreateNewPartActivity : AppCompatActivity() {
         {
             Toast.makeText(this, R.string.fieldsTitleInfo, Toast.LENGTH_SHORT).show()
         } else {
-        val coursePart = PartOfCourse(uid, imagePartUrl, titlePart, textPart)
+            val coursePart = PartOfCourse(uid, imagePartUrl, titlePart, textPart)
 
-        ref.setValue(coursePart)
-            .addOnSuccessListener {
-                val intent = Intent(this, CreateQuestionsActivity::class.java)
-                intent.putExtra("courseUid", courseUid)
-                intent.putExtra("courseTitle", titlePart)
-                intent.putExtra("coursePartUid", uid)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
-            }
+            ref.setValue(coursePart)
+                .addOnSuccessListener {
+                    val intent = Intent(this, CreateQuestionsActivity::class.java)
+                    intent.putExtra("courseUid", courseUid)
+                    intent.putExtra("courseTitle", titlePart)
+                    intent.putExtra("coursePartUid", uid)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, R.string.resetError, Toast.LENGTH_SHORT).show()
+                }
         }
     }
 

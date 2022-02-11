@@ -17,12 +17,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.activity_progress.*
+import kotlinx.android.synthetic.main.activity_progress.titleToolbar
 
 class ProgressActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var courseUid: String
+    private lateinit var courseTitle: String
     private lateinit var coursePartUid: String
     private lateinit var currentUserUid: String
     private lateinit var saveData: SaveData
@@ -36,6 +39,7 @@ class ProgressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
 
+        setBack()
         setTools()
         listenForProgress()
 
@@ -51,14 +55,25 @@ class ProgressActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun setBack() {
+        val saveData = SaveData(this)
+        if (saveData.loadDarkModeState() == true) {
+            layoutProgress.setBackgroundResource(R.drawable.black)
+        } else {
+            layoutProgress.setBackgroundResource(R.drawable.lamp_background)
+        }
+    }
+
     private fun setTools() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.progressToolbarTitle)
+        titleToolbar.setText(R.string.progressToolbarTitle)
     }
 
     private fun listenForProgress() {
         courseUid = intent.getStringExtra("courseUid") ?: ""
+        courseTitle = intent.getStringExtra("courseTitle") ?: "Темы"
         currentUserUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         val ref = FirebaseDatabase.getInstance().getReference("/course/$courseUid/parts/")
@@ -102,6 +117,7 @@ class ProgressActivity : AppCompatActivity() {
     private fun goToTheme() {
         val intent = Intent(Intent(this, CoursePartsActivity::class.java))
         intent.putExtra("courseUid", courseUid)
+        intent.putExtra("courseTitle", courseTitle)
         startActivity(intent)
     }
 }

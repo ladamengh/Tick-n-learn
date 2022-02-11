@@ -17,6 +17,26 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
+    <TextView
+        android:id="@+id/titleToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:text="Тест"
+        tools:textColor="@color/colorAccent" />
+
     <LinearLayout
         android:id="@+id/linearLayoutTime"
         android:layout_width="wrap_content"
@@ -169,7 +189,7 @@
             android:textAlignment="center"
             android:textColor="?attr/textColor"
             android:textSize="24sp"
-            tools:text="Question" />
+            tools:text="Вопрос" />
 
         <Button
             android:id="@+id/buttonChoice1"
@@ -177,11 +197,13 @@
             android:layout_height="wrap_content"
 
             android:layout_margin="10dp"
-            android:background="?attr/buttonColor"
+            android:background="@drawable/button"
+
             android:textAllCaps="false"
-            android:textColor="?attr/textColor"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
-            tools:text="Choice 1" />
+
+            tools:text="Вариант 1" />
 
         <Button
             android:id="@+id/buttonChoice2"
@@ -189,11 +211,12 @@
             android:layout_height="wrap_content"
 
             android:layout_margin="10dp"
-            android:background="?attr/buttonColor"
+            android:background="@drawable/button"
+
             android:textAllCaps="false"
-            android:textColor="?attr/textColor"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
-            tools:text="Choice 2" />
+            tools:text="Вариант 2" />
 
         <Button
             android:id="@+id/buttonChoice3"
@@ -201,11 +224,12 @@
             android:layout_height="wrap_content"
 
             android:layout_margin="10dp"
-            android:background="?attr/buttonColor"
+            android:background="@drawable/button"
+
             android:textAllCaps="false"
-            android:textColor="?attr/textColor"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
-            tools:text="Choice 3" />
+            tools:text="Вариант 3" />
 
         <Button
             android:id="@+id/buttonChoice4"
@@ -213,11 +237,12 @@
             android:layout_height="wrap_content"
 
             android:layout_margin="10dp"
-            android:background="?attr/buttonColor"
+            android:background="@drawable/button"
+
             android:textAllCaps="false"
-            android:textColor="?attr/textColor"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
-            tools:text="Choice 4" />
+            tools:text="Вариант 4" />
 
         <TextView
             android:id="@+id/buttonCancel"
